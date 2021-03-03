@@ -33,8 +33,8 @@ router.get('/', function(req, res, next) {
 
 });
 
-/* POST add many users. */
-router.post('/', authenticate.auth,function(req, res, next) {
+/* POST add users. */
+router.post('/', function(req, res, next) {
 
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
@@ -43,14 +43,22 @@ router.post('/', authenticate.auth,function(req, res, next) {
         connection.query(`INSERT INTO  accounts (name, username, password, email, role, customerid, create_date, update_date) 
         VALUES (?, ?, ?, ?, ?, ?, ?, ?);`
         , 
-        []
+        [   req.body.name,
+            req.body.username,
+            req.body.password,
+            req.body.email,
+            req.body.role,
+            req.body.customerid,
+            '2020-02-26 00:00:00',
+            '2020-02-26 00:00:00',
+        ]
         , function (error, results, fields) {
           // When done with the connection, release it.
           connection.release();
             
           // Handle error after the release.
           if (error) throw error;
-       
+            console.log("1 account added!");
           res.json(results);
         });
     });
