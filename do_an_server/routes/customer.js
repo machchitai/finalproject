@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query('SELECT * FROM cútomer', function (error, results, fields) {
+        connection.query('SELECT * FROM customer', function (error, results, fields) {
           // When done with the connection, release it.
           connection.release();
        
