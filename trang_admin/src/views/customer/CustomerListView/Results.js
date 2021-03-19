@@ -94,19 +94,19 @@ const Results = ({ className, customers, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Tên
+                  Name
                 </TableCell>
                 <TableCell>
                   Email
                 </TableCell>
                 <TableCell>
-                  Địa chỉ
+                  Address
                 </TableCell>
                 <TableCell>
-                  Điện thoại
+                  Phone
                 </TableCell>
                 <TableCell>
-                  Ngày đăng kí
+                  Register Date
                 </TableCell>
               </TableRow>
             </TableHead>

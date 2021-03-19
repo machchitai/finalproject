@@ -36,16 +36,16 @@ const Toolbar = ({ className, ...rest }) => {
         justifyContent="flex-end"
       >
         <Button className={classes.importButton}>
-          Nhập
+          Import
         </Button>
         <Button className={classes.exportButton}>
-          Xuất
+          Export
         </Button>
         <Button
           color="primary"
           variant="contained"
         >
-          Thêm người dùng
+          Add user
         </Button>
       </Box>
       <Box mt={3}>

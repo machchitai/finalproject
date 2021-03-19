@@ -188,10 +188,10 @@ const Results = ({ className, danhsachphanquyen, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Mã quyền
+                  Role ID
                 </TableCell>
                 <TableCell>
-                  Tên quyền
+                  Role Name
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -230,7 +230,7 @@ const Results = ({ className, danhsachphanquyen, ...rest }) => {
           })}
           <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
             <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-              Menu có quyền quản trị
+              Menu admin
             </DialogTitle>
             <DialogContent dividers>
               {

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
@@ -24,42 +23,42 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, donhangs, ...rest }) => {
+const Results = ({ className, orders, ...rest }) => {
   const classes = useStyles();
-  const [selectedDonhangIds, setSelectedDonhangIds] = useState([]);
+  const [selectedorderIds, setSelectedorderIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
   const handleSelectAll = (event) => {
-    let newSelectedDonhangIds;
+    let newSelectedorderIds;
 
     if (event.target.checked) {
-      newSelectedDonhangIds = donhangs.map((donhang) => donhang.ma);
+      newSelectedorderIds = orders.map((order) => order.ma);
     } else {
-      newSelectedDonhangIds = [];
+      newSelectedorderIds = [];
     }
 
-    setSelectedDonhangIds(newSelectedDonhangIds);
+    setSelectedorderIds(newSelectedorderIds);
   };
 
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedDonhangIds.indexOf(id);
-    let newSelectedDonhangIds = [];
+    const selectedIndex = selectedorderIds.indexOf(id);
+    let newSelectedorderIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(selectedDonhangIds, id);
+      newSelectedorderIds = newSelectedorderIds.concat(selectedorderIds, id);
     } else if (selectedIndex === 0) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(selectedDonhangIds.slice(1));
-    } else if (selectedIndex === selectedDonhangIds.length - 1) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(selectedDonhangIds.slice(0, -1));
+      newSelectedorderIds = newSelectedorderIds.concat(selectedorderIds.slice(1));
+    } else if (selectedIndex === selectedorderIds.length - 1) {
+      newSelectedorderIds = newSelectedorderIds.concat(selectedorderIds.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(
-        selectedDonhangIds.slice(0, selectedIndex),
-        selectedDonhangIds.slice(selectedIndex + 1)
+      newSelectedorderIds = newSelectedorderIds.concat(
+        selectedorderIds.slice(0, selectedIndex),
+        selectedorderIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedDonhangIds(newSelectedDonhangIds);
+    setSelectedorderIds(newSelectedorderIds);
   };
 
   const handleLimitChange = (event) => {
@@ -82,40 +81,37 @@ const Results = ({ className, donhangs, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedDonhangIds.length === donhangs.length}
+                    checked={selectedorderIds.length === orders.length}
                     color="primary"
                     indeterminate={
-                      selectedDonhangIds.length > 0
-                      && selectedDonhangIds.length < donhangs.length
+                      selectedorderIds.length > 0
+                      && selectedorderIds.length < orders.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
                 <TableCell>
-                  Mã đơn
+                  Order ID
                 </TableCell>
                 <TableCell>
-                  Thông tin người mua
+                  User Info
                 </TableCell>
                 <TableCell>
-                  Sản phẩm đã mua
-                </TableCell>
-                <TableCell>
-                  Ngày mua
+                  Products Bought
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {donhangs.slice(0, limit).map((donhang) => (
+              {orders.slice(0, limit).map((order) => (
                 <TableRow
                   hover
-                  key={donhang.ma}
-                  selected={selectedDonhangIds.indexOf(donhang.ma) !== -1}
+                  key={order.ma}
+                  selected={selectedorderIds.indexOf(order.ma) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedDonhangIds.indexOf(donhang.ma) !== -1}
-                      onChange={(event) => handleSelectOne(event, donhang.ma)}
+                      checked={selectedorderIds.indexOf(order.ma) !== -1}
+                      onChange={(event) => handleSelectOne(event, order.ma)}
                       value="true"
                     />
                   </TableCell>
@@ -124,39 +120,36 @@ const Results = ({ className, donhangs, ...rest }) => {
                       alignItems="center"
                       display="flex"
                     >
-                      {donhang.ma_truy_xuat_dh}
+                      {order.id_export_order}
                     </Box>
                   </TableCell>
                   <TableCell>
                     <div>
-                      Họ tên:
-                      {donhang.ho_ten_nguoi_nhan}
+                      Name:
+                      {order.receiver_name}
                     </div>
                     <div>
                       Email:
-                      {donhang.email}
+                      {order.email}
                     </div>
                     <div>
-                      Điện thoại:
-                      {donhang.dien_thoai_nguoi_nhan}
+                      Phone:
+                      {order.receiver_phone}
                     </div>
                     <div>
-                      Địa chỉ:
-                      {donhang.dia_chi_nguoi_nhan}
+                      Address:
+                      {order.receiver_address}
                     </div>
                   </TableCell>
                   <TableCell>
-                    {donhang.list_san_pham.map((sanpham) => {
+                    {order.list_san_pham.map((product) => {
                       return (
                         <div>
-                          {`${sanpham.ten_san_pham} - ${sanpham.so_luong} - ${sanpham.don_gia} - ${sanpham.thanh_tien}`}
+                          {`${product.name} - ${product.quantity} - ${product.price} - ${product.total}`}
                         </div>
                       );
                     })}
-                    <div>{donhang.tong_tien}</div>
-                  </TableCell>
-                  <TableCell>
-                    {moment(donhang.ngay_tao).format('DD/MM/YYYY HH:mm:ss')}
+                    <div>{order.sum}</div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -166,7 +159,7 @@ const Results = ({ className, donhangs, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={donhangs.length}
+        count={orders.length}
         onChangePage={handlePageChange}
         onChangeRowsPerPage={handleLimitChange}
         page={page}
@@ -179,7 +172,7 @@ const Results = ({ className, donhangs, ...rest }) => {
 
 Results.propTypes = {
   className: PropTypes.string,
-  donhangs: PropTypes.array.isRequired
+  orders: PropTypes.array.isRequired
 };
 
 export default Results;

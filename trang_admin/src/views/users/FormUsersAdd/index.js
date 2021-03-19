@@ -30,8 +30,8 @@ const FormUsersAdd = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     name: '',
-    tai_khoan: '',
-    mat_khau: '',
+    username: '',
+    password: '',
     email: ''
   });
 
@@ -49,7 +49,7 @@ const FormUsersAdd = () => {
       .then((data) => {
         console.log(data);
         setTypeError('success');
-        setMessageError('tạo user thành công!');
+        setMessageError('Create user successful!');
         setTimeout(() => {
           navigate('/app/users', { replace: true });
         }, 5000);
@@ -57,7 +57,7 @@ const FormUsersAdd = () => {
       .catch((err) => {
         console.log(err);
         setTypeError('error');
-        setMessageError('tạo user thất bại!');
+        setMessageError('Create user failed!');
         setIsSubmitting(false);
       });
   };
@@ -103,7 +103,7 @@ const FormUsersAdd = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Tạo User mới
+                    Create new user
                   </Typography>
                   <Typography
                     color="textSecondary"

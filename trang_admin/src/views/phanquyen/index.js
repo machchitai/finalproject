@@ -42,7 +42,7 @@ const CustomerListView = () => {
   return (
     <Page
       className={classes.root}
-      title="Danh sách phân quyền"
+      title="List"
     >
       <Container maxWidth={false}>
         <Box mt={3}>

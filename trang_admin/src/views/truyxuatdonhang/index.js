@@ -25,7 +25,7 @@ const TruyXuatDonHang = () => {
   return (
     <Page
       className={classes.root}
-      title="Truy xuất đơn hàng"
+      title="Export orders"
     >
       <Container maxWidth={false}>
         <Box mt={3}>

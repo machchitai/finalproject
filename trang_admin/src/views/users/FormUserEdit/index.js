@@ -28,8 +28,8 @@ const FormUserEdit = () => {
   const param = useParams();
   const [userInfo, setUserInfo] = useState({
     name: '',
-    tai_khoan: '',
-    mat_khau: '',
+    username: '',
+    password: '',
     email: ''
   });
 
@@ -55,7 +55,7 @@ const FormUserEdit = () => {
       .then((data) => {
         console.log(data);
         setTypeError('success');
-        setMessageError('cập nhật thông tin user thành công!');
+        setMessageError('Update successful!');
         setTimeout(() => {
           navigate('/app/users', { replace: true });
         }, 10000);
@@ -63,7 +63,7 @@ const FormUserEdit = () => {
       .catch((err) => {
         console.log(err);
         setTypeError('error');
-        setMessageError('cập nhật thông tin user thất bại!');
+        setMessageError('Update failed!');
       });
   };
 
@@ -105,7 +105,7 @@ const FormUserEdit = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Tạo User mới
+                    Create new user
                   </Typography>
                   <Typography
                     color="textSecondary"
@@ -128,15 +128,15 @@ const FormUserEdit = () => {
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.tai_khoan && errors.tai_khoan)}
+                  error={Boolean(touched.username && errors.username)}
                   fullWidth
-                  helperText={touched.tai_khoan && errors.tai_khoan}
-                  label="Tài khoản"
+                  helperText={touched.username && errors.username}
+                  label="Username"
                   margin="normal"
-                  name="tai_khoan"
+                  name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.tai_khoan}
+                  value={userInfo.username}
                   variant="outlined"
                 />
                 <TextField
@@ -153,16 +153,16 @@ const FormUserEdit = () => {
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.mat_khau && errors.mat_khau)}
+                  error={Boolean(touched.password && errors.password)}
                   fullWidth
-                  helperText={touched.mat_khau && errors.mat_khau}
-                  label="Mật Khẩu"
+                  helperText={touched.password && errors.password}
+                  label="Password"
                   margin="normal"
-                  name="mat_khau"
+                  name="password"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="password"
-                  value={userInfo.mat_khau}
+                  value={userInfo.password}
                   variant="outlined"
                 />
                 <Box my={2}>

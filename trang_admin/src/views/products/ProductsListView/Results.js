@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import moment from 'moment';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
@@ -92,19 +91,13 @@ const Results = ({ className, products, ...rest }) => {
                   />
                 </TableCell>
                 <TableCell>
-                  Tên sản phẩm
+                  Product Name
                 </TableCell>
                 <TableCell>
-                  Hình
+                  Image
                 </TableCell>
                 <TableCell>
-                  Giá
-                </TableCell>
-                <TableCell>
-                  Lượt xem
-                </TableCell>
-                <TableCell>
-                  Ngày tạo
+                  Price
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -127,20 +120,14 @@ const Results = ({ className, products, ...rest }) => {
                       alignItems="center"
                       display="flex"
                     >
-                      {product.ten_san_pham}
+                      {product.name}
                     </Box>
                   </TableCell>
                   <TableCell>
-                    <img style={{ width: '100px' }} src={`/public/static/images/san_pham/${product.hinh_san_pham}`} alt={product.ten_san_pham} />
+                    <img style={{ width: '100px' }} src={`/public/static/images/san_pham/${product.image}`} alt={product.name} />
                   </TableCell>
                   <TableCell>
-                    {product.don_gia}
-                  </TableCell>
-                  <TableCell>
-                    {product.so_lan_xem}
-                  </TableCell>
-                  <TableCell>
-                    {moment(product.ngay_tao).format('DD/MM/YYYY')}
+                    {product.price}
                   </TableCell>
                 </TableRow>
               ))}

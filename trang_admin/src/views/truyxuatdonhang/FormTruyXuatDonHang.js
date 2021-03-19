@@ -12,7 +12,7 @@ const FormTruyXuatDonHang = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (madonhang.length >= 16) {
-      axios.get(`http://localhost:4000/don-hang/tim-kiem/${madonhang}`)
+      axios.get(`http://localhost:4000/orders/search/${madonhang}`)
         .then((response) => {
           console.log(response);
           setListDonHang(response.data);
@@ -21,7 +21,7 @@ const FormTruyXuatDonHang = () => {
           console.log(err);
         });
     } else {
-      alert('Mã đơn hàng quá ngắn!');
+      alert('Code too short!');
     }
   };
 
@@ -34,10 +34,10 @@ const FormTruyXuatDonHang = () => {
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
-          helperText="Mã Đơn Hàng"
-          label="Mã Đơn Hàng"
+          helperText="Order ID"
+          label="Order ID"
           margin="normal"
-          name="madonhang"
+          name="orderid"
           onChange={handleChange}
           value={madonhang}
           variant="outlined"
