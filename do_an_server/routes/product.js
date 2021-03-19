@@ -11,13 +11,15 @@ var pool  = mysql.createPool({
 });
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/:id_san_pham', function(req, res, next) {
+
+    //console.log(req.params.id_san_pham);
 
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query('SELECT * FROM product', function (error, results, fields) {
+        connection.query(`SELECT * FROM prodcut WHERE id = '${req.params.id_san_pham}'`, function (error, results, fields) {
           // When done with the connection, release it.
           connection.release();
        
@@ -28,6 +30,9 @@ router.get('/', function(req, res, next) {
         });
     });
 
+    //res.json([]);
+    
 });
+
 
 module.exports = router;
