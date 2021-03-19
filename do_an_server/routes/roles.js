@@ -15,7 +15,7 @@ var pool  = mysql.createPool({
     host            : 'localhost',
     user            : 'root',
     password        : '',
-    database        : 'shop_ban_hang'
+    database        : 'fashionstore'
 });
 
 /* GET users listing. */
@@ -25,7 +25,7 @@ router.get('/', function(req, res, next) {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query(`SELECT * FROM quyen_nguoi_dung`, function (error, results, fields) {
+        connection.query(`SELECT * FROM roles`, function (error, results, fields) {
             if (err) throw err; // not connected!
 
             res.json(results);
@@ -35,16 +35,16 @@ router.get('/', function(req, res, next) {
     
 });
 
-router.get('/:id_quyen', function(req, res, next){
+router.get('/:id_role', function(req, res, next){
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query(`SELECT mq.* 
-            FROM menu_quan_tri mq
-            JOIN bang_phan_quyen qnd
-            ON mq.id = qnd.id_menu_quan_tri
-            WHERE qnd.id_quyen_nguoi_dung = ?`, req.params.id_quyen, function (error, results, fields) {
+        connection.query(`SELECT mad.* 
+            FROM menu_admin mad
+            JOIN role_distribution_table rdt
+            ON mad.id = rdt.id_menu_admin
+            WHERE rdt.id_roles = ?`, req.params.id_role, function (error, results, fields) {
             if (err) throw err; // not connected!
 
             res.json(results);
@@ -53,7 +53,7 @@ router.get('/:id_quyen', function(req, res, next){
     });
 });
 
-router.put('/:id_quyen', function(req, res, next) {
+router.put('/:id_role', function(req, res, next) {
 
     console.log(req.body, req.params);
     //res.json({});
@@ -62,17 +62,17 @@ router.put('/:id_quyen', function(req, res, next) {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query(`SELECT * FROM menu_quan_tri`, function (error, results_menu_quyen, fields) {
+        connection.query(`SELECT * FROM menu_admin`, function (error, results_menu_role, fields) {
             if (err) throw err; // not connected!
 
-            //console.log(results_menu_quyen);
-            var mang_update = results_menu_quyen.filter(menu_quyen => req.body.find(item_quyen_moi => item_quyen_moi.alias === menu_quyen.alias));
+            //console.log(results_menu_role);
+            var update = results_menu_role.filter(menu_role => req.body.find(item_new_role => item_new_role.alias === menu_role.alias));
 
-            connection.query(`DELETE FROM quyen_nguoi_dung_menu_quan_tri WHERE id_quyen_nguoi_dung = ?`, [req.params.id_quyen], function (error, result_delete, fields) {
+            connection.query(`DELETE FROM role_distribution_table WHERE id_roles = ?`, [req.params.id_role], function (error, result_delete, fields) {
                 if (err) throw err; // not connected!
 
-                for(let i = 0; i < mang_update.length; i++){
-                    connection.query(`INSERT INTO quyen_nguoi_dung_menu_quan_tri(id_quyen_nguoi_dung, id_menu_quan_tri) VALUES(?, ?)`, [req.params.id_quyen, mang_update[i].id], function(error, result_insert, fields){
+                for(let i = 0; i < update.length; i++){
+                    connection.query(`INSERT INTO role_distribution_table (id_roles, id_menu_admin) VALUES(?, ?)`, [req.params.id_role, update[i].id], function(error, result_insert, fields){
                         if (err) throw err; // not connected!
 
                         console.log(i);

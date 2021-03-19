@@ -15,139 +15,139 @@ var pool  = mysql.createPool({
     host            : 'localhost',
     user            : 'root',
     password        : '',
-    database        : 'shop_ban_hang'
+    database        : 'fashionstore'
 });
 
-const MongoClient = require('mongodb').MongoClient;
-const ObjectID = require('mongodb').ObjectID;
+// const MongoClient = require('mongodb').MongoClient;
+// const ObjectID = require('mongodb').ObjectID;
 const { UpgradeRequired } = require('http-errors');
 
 // Connection URL
-const url = 'mongodb://localhost:27017';
+// const url = 'mongodb://localhost:27017';
 
-const dbName = 'shop_online';
+// const dbName = 'fashionstore';
 
-router.get('/', (req, res) => {
-    MongoClient.connect(url, function(err, client) {
-        if(err)
-            console.log(err);
+// router.get('/', (req, res) => {
+//     MongoClient.connect(url, function(err, client) {
+//         if(err)
+//             console.log(err);
 
-        const db = client.db(dbName);
+//         const db = client.db(dbName);
 
-        const collection_user = db.collection('users');
+//         const collection_user = db.collection('users');
 
-        collection_user.find({}).toArray(function(err, ds_user) {
-            if(err)
-                console.log(err);
+//         collection_user.find({}).toArray(function(err, ds_user) {
+//             if(err)
+//                 console.log(err);
 
-            //console.log(ds_user);
+//             //console.log(ds_user);
 
-            res.json({'xu_ly': 'thông tin user', 'data': ds_user});
+//             res.json({'xu_ly': 'thông tin user', 'data': ds_user});
             
-            client.close();
-        });
-    });
-});
+//             client.close();
+//         });
+//     });
+// });
 
-router.get('/:id_user', (req, res) => {
+// router.get('/:id_user', (req, res) => {
 
-    MongoClient.connect(url, function(err, client) {
-        if(err)
-            console.log(err);
-        const db = client.db(dbName);
-        const collection_user = db.collection('users');
-        //collection_user.findOne({'eidil': req.params.id_user},function(err, info_user) {
-        collection_user.findOne({'_id': ObjectID(req.params.id_user)},function(err, info_user) {
-            if(err)
-                console.log(err);
-            //console.log(ds_user);
-            res.json({'xu_ly': 'thông tin user', 'data': info_user});
-            client.close();
-        });
-    });
-    //res.json({'xu_ly': 'thông tin user ' + req.params.id_user});
-});
+//     MongoClient.connect(url, function(err, client) {
+//         if(err)
+//             console.log(err);
+//         const db = client.db(dbName);
+//         const collection_user = db.collection('users');
+//         //collection_user.findOne({'eidil': req.params.id_user},function(err, info_user) {
+//         collection_user.findOne({'_id': ObjectID(req.params.id_user)},function(err, info_user) {
+//             if(err)
+//                 console.log(err);
+//             //console.log(ds_user);
+//             res.json({'xu_ly': 'thông tin user', 'data': info_user});
+//             client.close();
+//         });
+//     });
+//     //res.json({'xu_ly': 'thông tin user ' + req.params.id_user});
+// });
 
-router.post('/', authenticate.auth, (req, res) => {
-    //console.log(hahaha.length);
-    res.json({
-        'xu_ly': 'thêm user mới',
-        data_send: req.body
-    });
-});
+// router.post('/', authenticate.auth, (req, res) => {
+//     //console.log(hahaha.length);
+//     res.json({
+//         'xu_ly': 'thêm user mới',
+//         data_send: req.body
+//     });
+// });
 
-router.post('/sign-up', (req, res) => {
-    MongoClient.connect(url, function(err, client) {
-        var data_save = req.body;
-        var created_date = new Date().toISOString();
-        data_save.created_date = created_date;
-        data_save.updated_date = created_date;
-        data_save.idt_khau = md5(data_save.idt_khau);
+// router.post('/sign-up', (req, res) => {
+//     MongoClient.connect(url, function(err, client) {
+//         var data_save = req.body;
+//         var created_date = new Date().toISOString();
+//         data_save.created_date = created_date;
+//         data_save.updated_date = created_date;
+//         data_save.idt_khau = md5(data_save.idt_khau);
 
-        if(err)
-            console.log(err);
-        const db = client.db(dbName);
-        const collection_user = db.collection('users');
-        collection_user.insertOne(data_save, () => {
-            res.json({
-                'xu_ly': 'đăng ký user mới',
-                data_send: data_save
-            });
-        })
-    });
-});
+//         if(err)
+//             console.log(err);
+//         const db = client.db(dbName);
+//         const collection_user = db.collection('users');
+//         collection_user.insertOne(data_save, () => {
+//             res.json({
+//                 'xu_ly': 'đăng ký user mới',
+//                 data_send: data_save
+//             });
+//         })
+//     });
+// });
 
-router.put('/:id_user', (req, res) => {
-    //console.log(req.params.eidil);
-    //console.log(req.body);
-    MongoClient.connect(url, function(err, client) {
-        if(err)
-            console.log(err);
-        const db = client.db(dbName);
-        const collection_user = db.collection('users');
-        delete req.body._id;
+// router.put('/:id_user', (req, res) => {
+//     //console.log(req.params.eidil);
+//     //console.log(req.body);
+//     MongoClient.connect(url, function(err, client) {
+//         if(err)
+//             console.log(err);
+//         const db = client.db(dbName);
+//         const collection_user = db.collection('users');
+//         delete req.body._id;
 
-        collection_user.findOne({_id: ObjectID(req.params.id_user)}, function(err, info_user){
-            if(err)
-                console.log(err);
-            var data_save = req.body;
-            if(req.body.idt_khau == info_user.idt_khau){
-                data_save.idt_khau = info_user.idt_khau;
-            }
-            else {
-                data_save.idt_khau = md5(req.body.idt_khau);
-            }
-            var updated_date = new Date().toISOString();
-            data_save.updated_date = updated_date;
-            //collection_user.updateOne({eidil: req.params.eidil}, { $set: req.body }, () => {
-            collection_user.updateOne({_id: ObjectID(req.params.id_user)}, { $set: data_save }, () => {
-                res.json({
-                    'xu_ly': 'update user ' + req.params.id_user + ' thành công',
-                    data_send: req.body
-                });
-            });
-        });
-    });
-});
+//         collection_user.findOne({_id: ObjectID(req.params.id_user)}, function(err, info_user){
+//             if(err)
+//                 console.log(err);
+//             var data_save = req.body;
+//             if(req.body.idt_khau == info_user.idt_khau){
+//                 data_save.idt_khau = info_user.idt_khau;
+//             }
+//             else {
+//                 data_save.idt_khau = md5(req.body.idt_khau);
+//             }
+//             var updated_date = new Date().toISOString();
+//             data_save.updated_date = updated_date;
+//             //collection_user.updateOne({eidil: req.params.eidil}, { $set: req.body }, () => {
+//             collection_user.updateOne({_id: ObjectID(req.params.id_user)}, { $set: data_save }, () => {
+//                 res.json({
+//                     'xu_ly': 'update user ' + req.params.id_user + ' thành công',
+//                     data_send: req.body
+//                 });
+//             });
+//         });
+//     });
+// });
 
 
-//router.delete('/:eidil', authenticate.auth, (req, res) => {
-router.delete('/:id_user', authenticate.auth, (req, res) => {
-    console.log(req.params.eidil);
-    MongoClient.connect(url, function(err, client) {
-        if(err)
-            console.log(err);
-        const db = client.db(dbName);
-        const collection_user = db.collection('users');
-        collection_user.deleteOne({_id: ObjectID(req.params.id_user)}, () => {
-            res.json({
-                'xu_ly': 'delete user ' + req.params.eidil + ' thành công',
-                data_send: req.body
-            });
-        });
+// //router.delete('/:eidil', authenticate.auth, (req, res) => {
+// router.delete('/:id_user', authenticate.auth, (req, res) => {
+//     console.log(req.params.eidil);
+//     MongoClient.connect(url, function(err, client) {
+//         if(err)
+//             console.log(err);
+//         const db = client.db(dbName);
+//         const collection_user = db.collection('users');
+//         collection_user.deleteOne({_id: ObjectID(req.params.id_user)}, () => {
+//             res.json({
+//                 'xu_ly': 'delete user ' + req.params.eidil + ' thành công',
+//                 data_send: req.body
+//             });
+//         });
         
-    });
-})
+//     });
+// })
 
 
 // router.post('/log-in', (req, res) => {
@@ -212,18 +212,18 @@ router.post('/admin-log-in', (req, res) => {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query(`SELECT * FROM users WHERE username = ? OR eidil = ?`, [req.body.ten_dang_nhap, req.body.ten_dang_nhap], function (error, results, fields) {
+        connection.query(`SELECT * FROM users WHERE username = ? OR email = ?`, [req.body.username, req.body.email], function (error, results, fields) {
           // Handle error after the release.
           if (error) throw error;
 
           var string_token = '';
           if(results.length && results[0]){
-            if(results[0].idt_khau == md5(req.body.idt_khau)){
+            if(results[0].password == md5(req.body.password)){
 
                 connection.query(`SELECT * FROM token WHERE user_id = ?`, [results[0].id], function (error, results_token, fields){
                     if (error) throw error;
 
-                    string_token = base64.encode(results[0].eidil + results[0].ten_dang_nhap + uuidv4());
+                    string_token = base64.encode(results[0].eidil + results[0].username + uuidv4());
                     console.log(string_token);
                     created_date = (new Date().toISOString().split('.'))[0].replace(/T/, ' ');
                     expired_date = (new Date(new Date().getTime()+(30*24*60*60*1000)).toISOString().split('.'))[0].replace(/T/, ' ');
@@ -271,7 +271,7 @@ router.post('/admin-log-in', (req, res) => {
                 
                 
             }
-            else{//sai mật khẩu
+            else{ // wrong password
                 var error = {
                     error: true,
                     message: "Wrong username or password"
@@ -279,7 +279,7 @@ router.post('/admin-log-in', (req, res) => {
                 res.json(error);
             }
           }
-          else {//tài khoản không tồn tại
+          else { // account not exist
             var error = {
                 error: true,
                 message: "Wrong username or password"
@@ -303,14 +303,14 @@ router.post('/admin-authorized', (req, res) => {
         pool.getConnection(function(err, connection) {
             if (err) throw err;
     
-            connection.query(`SELECT mqt.*
+            connection.query(`SELECT mad.*
             FROM token t
-            JOIN nguoi_dung nd
-            ON nd.id = t.user_id
-            JOIN bang_phan_quyen bpq
-            ON nd.id_quyen = bpq.id_quyen_nguoi_dung
-            JOIN menu_quan_tri mqt
-            ON bpq.id_menu_quan_tri = mqt.id
+            JOIN users u
+            ON u.id = t.user_id
+            JOIN role_distribution_table rdt
+            ON u.role = rdt.id_roles
+            JOIN menu_admin mad
+            ON rdt.id_menu_admin = mad.id
             WHERE t.token = ?`, 
             [authorized], 
             function (error, results_permission, fields){
