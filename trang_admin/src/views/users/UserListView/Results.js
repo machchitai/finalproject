@@ -94,7 +94,7 @@ const Results = ({ className, customers, ...rest }) => {
   const handleSendRequestDeleteUser = () => {
     axios.delete(`http://localhost:4000/user/${userIdCurrent}`, {
       auth: {
-        username: 'hungnguyen',
+        username: 'machchitai',
         password: '123456'
       }
     })
@@ -109,12 +109,12 @@ const Results = ({ className, customers, ...rest }) => {
   };
 
   const handleRemoveUserSelected = () => {
-    console.log('xoa danh sach user');
+    console.log('delete user');
     console.log(selectedCustomerIds);
 
     axios.delete('http://localhost:4000/users', {
       auth: {
-        username: 'hungnguyen',
+        username: 'machchitai',
         password: '123456'
       },
       data: selectedCustomerIds

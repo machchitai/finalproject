@@ -11,9 +11,9 @@ import RegisterView from 'src/views/auth/RegisterView';
 import UserListView from 'src/views/users/UserListView';
 import FormUsersAdd from 'src/views/users/FormUsersAdd';
 import FormUserEdit from 'src/views/users/FormUserEdit';
-import QuanLySanPhamListView from 'src/views/products/ProductsListView';
-import PhanQuyen from 'src/views/phanquyen';
-import TruyXuatDonHang from 'src/views/truyxuatdonhang';
+import ProdcutManageListView from 'src/views/products/ProductsListView';
+import RoleDist from 'src/views/roledist';
+import ExportOrder from 'src/views/exportorder';
 
 const routes = [
   {
@@ -26,9 +26,9 @@ const routes = [
       { path: 'users', element: <UserListView /> },
       { path: 'users/:id_user', element: <FormUserEdit /> },
       { path: 'users/them', element: <FormUsersAdd /> },
-      { path: 'quan-ly-san-pham', element: <QuanLySanPhamListView alias="quan-ly-san-pham" /> },
-      { path: 'phan-quyen', element: <PhanQuyen alias="phan-quyen" /> },
-      { path: 'truy-xuat-don-hang', element: <TruyXuatDonHang alias="truy-xuat-don-hang" /> },
+      { path: 'product-management', element: <ProdcutManageListView alias="product-management" /> },
+      { path: 'distribute-role', element: <RoleDist alias="distribute-role" /> },
+      { path: 'export-orders', element: <ExportOrder alias="export-orders" /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

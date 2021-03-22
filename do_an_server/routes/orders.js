@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-// var nodeidiler = require('nodeidiler');
+// var nodemailer = require('nodemailer');
 // var smtpTransport = require('nodeidiler-smtp-transport');
 
 var pool  = mysql.createPool({
@@ -14,11 +14,11 @@ var pool  = mysql.createPool({
 });
 
 
-// var transporter = nodeidiler.createTransport(smtpTransport({
+// var transporter = nodemailer.createTransport(smtpTransport({
 //     service: 'gidil',
 //     host: 'smtp.gidil.com',
 //     auth: {
-//       user: 'idchchitai@gidil.com',
+//       user: 'machchitai@gidil.com',
 //       pass: '123123'
 //     }
 // }));
@@ -121,7 +121,7 @@ router.post('/', function(req, res, next) {
                                                 <div>Bạn mua đơn hàng: <a href="http://localhost:3000/don-hang/${id_export_order}">${id_export_order}</a></div>
                                             `
 
-                                            // var idilOptions = {
+                                            // var maililOptions = {
                                             //     from: 'hungbookstoreonline@gidil.com',
                                             //     to: req.body.eidil,
                                             //     subject: 'Cám ơn bạn đã đặt hàng tại Shop Online',
@@ -129,7 +129,7 @@ router.post('/', function(req, res, next) {
                                             //     html: html_string
                                             // };
 
-                                            // transporter.sendidil(idilOptions, function(error, info){
+                                            // transporter.sendmail(idilOptions, function(error, info){
                                             //     if (error) {
                                             //       console.log(error);
                                             //     } else {

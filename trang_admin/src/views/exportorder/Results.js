@@ -19,46 +19,46 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
-    idrginRight: theme.spacing(2)
+    marginRight: theme.spacing(2)
   }
 }));
 
-const Results = ({ className, products, ...rest }) => {
+const Results = ({ className, orders, ...rest }) => {
   const classes = useStyles();
-  const [selectedProductIds, setSelectedProductIds] = useState([]);
+  const [selectedorderIds, setSelectedorderIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
   const handleSelectAll = (event) => {
-    let newSelectedProductIds;
+    let newSelectedorderIds;
 
     if (event.target.checked) {
-      newSelectedProductIds = products.idp((product) => product.id);
+      newSelectedorderIds = orders.map((order) => order.ma);
     } else {
-      newSelectedProductIds = [];
+      newSelectedorderIds = [];
     }
 
-    setSelectedProductIds(newSelectedProductIds);
+    setSelectedorderIds(newSelectedorderIds);
   };
 
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedProductIds.indexOf(id);
-    let newSelectedProductIds = [];
+    const selectedIndex = selectedorderIds.indexOf(id);
+    let newSelectedorderIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedProductIds = newSelectedProductIds.concat(selectedProductIds, id);
+      newSelectedorderIds = newSelectedorderIds.concat(selectedorderIds, id);
     } else if (selectedIndex === 0) {
-      newSelectedProductIds = newSelectedProductIds.concat(selectedProductIds.slice(1));
-    } else if (selectedIndex === selectedProductIds.length - 1) {
-      newSelectedProductIds = newSelectedProductIds.concat(selectedProductIds.slice(0, -1));
+      newSelectedorderIds = newSelectedorderIds.concat(selectedorderIds.slice(1));
+    } else if (selectedIndex === selectedorderIds.length - 1) {
+      newSelectedorderIds = newSelectedorderIds.concat(selectedorderIds.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedProductIds = newSelectedProductIds.concat(
-        selectedProductIds.slice(0, selectedIndex),
-        selectedProductIds.slice(selectedIndex + 1)
+      newSelectedorderIds = newSelectedorderIds.concat(
+        selectedorderIds.slice(0, selectedIndex),
+        selectedorderIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedProductIds(newSelectedProductIds);
+    setSelectedorderIds(newSelectedorderIds);
   };
 
   const handleLimitChange = (event) => {
@@ -81,37 +81,37 @@ const Results = ({ className, products, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedProductIds.length === products.length}
+                    checked={selectedorderIds.length === orders.length}
                     color="primary"
                     indeterminate={
-                      selectedProductIds.length > 0
-                      && selectedProductIds.length < products.length
+                      selectedorderIds.length > 0
+                      && selectedorderIds.length < orders.length
                     }
                     onChange={handleSelectAll}
                   />
                 </TableCell>
                 <TableCell>
-                  Product Name
+                  Order ID
                 </TableCell>
                 <TableCell>
-                  Image
+                  User Info
                 </TableCell>
                 <TableCell>
-                  Price
+                  Products Bought
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.slice(0, limit).idp((product) => (
+              {orders.slice(0, limit).map((order) => (
                 <TableRow
                   hover
-                  key={product.id}
-                  selected={selectedProductIds.indexOf(product.id) !== -1}
+                  key={order.ma}
+                  selected={selectedorderIds.indexOf(order.ma) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedProductIds.indexOf(product.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, product.id)}
+                      checked={selectedorderIds.indexOf(order.ma) !== -1}
+                      onChange={(event) => handleSelectOne(event, order.ma)}
                       value="true"
                     />
                   </TableCell>
@@ -120,14 +120,36 @@ const Results = ({ className, products, ...rest }) => {
                       alignItems="center"
                       display="flex"
                     >
-                      {product.name}
+                      {order.id_export_order}
                     </Box>
                   </TableCell>
                   <TableCell>
-                    <img style={{ width: '100px' }} src={`/public/static/images/san_pham/${product.image}`} alt={product.name} />
+                    <div>
+                      Name:
+                      {order.receiver_name}
+                    </div>
+                    <div>
+                      Email:
+                      {order.email}
+                    </div>
+                    <div>
+                      Phone:
+                      {order.receiver_phone}
+                    </div>
+                    <div>
+                      Address:
+                      {order.receiver_address}
+                    </div>
                   </TableCell>
                   <TableCell>
-                    {product.price}
+                    {order.product_list.map((product) => {
+                      return (
+                        <div>
+                          {`${product.name} - ${product.quantity} - ${product.price} - ${product.total}`}
+                        </div>
+                      );
+                    })}
+                    <div>{order.sum}</div>
                   </TableCell>
                 </TableRow>
               ))}
@@ -137,7 +159,7 @@ const Results = ({ className, products, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={products.length}
+        count={orders.length}
         onChangePage={handlePageChange}
         onChangeRowsPerPage={handleLimitChange}
         page={page}
@@ -150,7 +172,7 @@ const Results = ({ className, products, ...rest }) => {
 
 Results.propTypes = {
   className: PropTypes.string,
-  products: PropTypes.array.isRequired
+  orders: PropTypes.array.isRequired
 };
 
 export default Results;

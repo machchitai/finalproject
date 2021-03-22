@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const QuanLySanPhamListView = ({ ...rest }) => {
+const ProdcutManageListView = ({ ...rest }) => {
   const classes = useStyles();
   const [products, setProduct] = useState([]);
 
@@ -26,8 +26,8 @@ const QuanLySanPhamListView = ({ ...rest }) => {
     const arraytest = [
       {
         id: 1,
-        alias: 'truy-xuat-don-hang',
-        ten_menu: 'Truy Xuất Đơn Hàng',
+        alias: 'export-orders',
+        ten_menu: 'Export Orders',
         type_menu: 'read'
       }
     ];
@@ -44,10 +44,10 @@ const QuanLySanPhamListView = ({ ...rest }) => {
     if (booleantest) {
       console.log('do nothing');
     } else {
-      alert('Bạn không có quyền');
+      alert('You do not have permission');
     }
 
-    axios.get('http://localhost:4000/quan-ly-san-pham/')
+    axios.get('http://localhost:4000/product-management/')
       .then((response) => {
         console.log(response);
         setProduct(response.data);
@@ -60,7 +60,7 @@ const QuanLySanPhamListView = ({ ...rest }) => {
   return (
     <Page
       className={classes.root}
-      title="Sản phẩm"
+      title="Products"
     >
       <Container maxWidth={false}>
         <Toolbar />
@@ -72,4 +72,4 @@ const QuanLySanPhamListView = ({ ...rest }) => {
   );
 };
 
-export default QuanLySanPhamListView;
+export default ProdcutManageListView;

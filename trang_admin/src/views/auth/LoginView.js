@@ -62,8 +62,8 @@ const LoginView = ({ ...rest }) => {
               console.log(element);
               setisSubmitting(true);
               axios.post('http://localhost:4000/user/admin-log-in', {
-                ten_dang_nhap: element.email,
-                mat_khau: element.password
+                email: element.email,
+                password: element.password
               })
                 .then((response) => {
                   console.log(response);
