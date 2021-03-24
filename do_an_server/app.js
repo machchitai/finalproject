@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var fs = require('fs');
+var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
@@ -13,6 +15,8 @@ var menuadminRouter = require ('./routes/menuadmin');
 var roledistRouter = require ('./routes/roles');
 
 var app = express();
+
+app.use(cors());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,10 +36,12 @@ app.use('/orders', ordersRouter);
 app.use('/menu-admin', menuadminRouter);
 app.use('/distribute-role', roledistRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+app.use((req, res, next) => {
+  //console.log(Date.now() + '-' + req.method + '-' + req.url);
+  var string_log = Date.now() + '-' + req.method + '-' + req.url + '\n';
+  fs.appendFileSync('./data_log/request.log', string_log);
+  next();
+})
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -43,9 +49,13 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
+  var string_log = Date.now() + '-' + req.url + '-500-Server Internal Error-' + err.message + '\n';
+  fs.appendFileSync('./data_log/error.log', string_log);
+
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.send("Server Error")
+  //res.render('error');
 });
 
 module.exports = app;

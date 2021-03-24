@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-var authenticate = require('../middleware/auth');
+// var authenticate = require('../middleware/auth');
 var md5 = require('md5');
 var mysql = require('mysql');
 

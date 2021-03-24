@@ -11,7 +11,7 @@ import RegisterView from 'src/views/auth/RegisterView';
 import UserListView from 'src/views/users/UserListView';
 import FormUsersAdd from 'src/views/users/FormUsersAdd';
 import FormUserEdit from 'src/views/users/FormUserEdit';
-import ProdcutManageListView from 'src/views/products/ProductsListView';
+import ProductManageListView from 'src/views/products/ProductsListView';
 import RoleDist from 'src/views/roledist';
 import ExportOrder from 'src/views/exportorder';
 
@@ -26,7 +26,7 @@ const routes = [
       { path: 'users', element: <UserListView /> },
       { path: 'users/:id_user', element: <FormUserEdit /> },
       { path: 'users/them', element: <FormUsersAdd /> },
-      { path: 'product-management', element: <ProdcutManageListView alias="product-management" /> },
+      { path: 'product-management', element: <ProductManageListView alias="product-management" /> },
       { path: 'distribute-role', element: <RoleDist alias="distribute-role" /> },
       { path: 'export-orders', element: <ExportOrder alias="export-orders" /> },
       { path: '*', element: <Navigate to="/404" /> }

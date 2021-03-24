@@ -51,8 +51,8 @@ const LoginView = ({ ...rest }) => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: 'demo@devias.io',
-              password: 'Password123'
+              email: 'machchitai@gmail.com',
+              password: '123456'
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),

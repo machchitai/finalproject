@@ -58,7 +58,7 @@ router.post('/admin-log-in', (req, res) => {
                     created_date = (new Date().toISOString().split('.'))[0].replace(/T/, ' ');
                     expired_date = (new Date(new Date().getTime()+(30*24*60*60*1000)).toISOString().split('.'))[0].replace(/T/, ' ');
 
-                    if(results_token.length){//nếu có token rồi
+                    if(results_token.length){ // token exist
                         connection.query(`UPDATE token
                         SET token = ?,
                         expired_date = ?
@@ -77,7 +77,7 @@ router.post('/admin-log-in', (req, res) => {
                             connection.release();
                         });
                     }
-                    else {//chưa có token
+                    else { // token not exist
 
                         connection.query(`INSERT INTO token(token, type_token, user_id, created_date, expired_date)
                                             VALUES(?, ?, ?, ?, ?)`, 
@@ -99,7 +99,7 @@ router.post('/admin-log-in', (req, res) => {
                 })
 
             }
-            else{ // wrong password
+            else { // wrong password
                 var error = {
                     error: true,
                     message: "Wrong username or password"

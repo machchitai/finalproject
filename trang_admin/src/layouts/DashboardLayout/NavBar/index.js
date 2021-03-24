@@ -62,9 +62,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       title: 'Dashboard'
     },
     {
-      href: '/app/truy-xuat-don-hang',
+      href: '/app/export-orders',
       icon: ReceiptIcon,
-      title: 'Truy xuất đơn hàng'
+      title: 'Export Orders'
     },
     {
       href: '/app/customers',
@@ -82,14 +82,14 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       title: 'Products'
     },
     {
-      href: '/app/quan-ly-san-pham',
+      href: '/app/product-management',
       icon: ShoppingBagIcon,
-      title: 'Quản lý sản phẩm'
+      title: 'Products Management'
     },
     {
-      href: '/app/phan-quyen',
+      href: '/app/distribute-role',
       icon: AccountBoxIcon,
-      title: 'Quản lý phân quyền'
+      title: 'Manage Users Roles'
     },
     {
       href: '/app/account',

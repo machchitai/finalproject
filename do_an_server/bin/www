@@ -9,8 +9,10 @@
  var http = require('http');
  const express = require("express");
  
+ const MongoClient = require('mongodb').MongoClient;
  
  // Connection URL
+ const url = 'mongodb://localhost:27017';
  
  const dbName = 'database_chat';
  
@@ -54,6 +56,29 @@
      //   "room" : ""
      // }
    
+ 
+     MongoClient.connect(url, function(err, client) {
+       if(err)
+           console.log(err);
+       const db = client.db(dbName);
+       const collection_chat_message = db.collection('chat_message');
+       collection_chat_message.insertOne(data, () => {
+         
+         if(data.room){
+           console.log('room', data.room);
+           io.in(data.room).emit('MessageFromServer', data);
+         }
+         else{
+           console.log('broadcast');
+           socket.broadcast.emit("MessageFromServer", data);
+           socket.emit("MessageFromServer", data);
+         }
+         
+         
+       });
+ 
+     });
+     
    })
  
    // setInterval(() => {
