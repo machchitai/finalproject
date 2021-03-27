@@ -18,16 +18,16 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProdcutManageListView = ({ ...rest }) => {
+const ProductManageListView = ({ ...rest }) => {
   const classes = useStyles();
   const [products, setProduct] = useState([]);
 
   useEffect(() => {
     const arraytest = [
       {
-        id: 1,
-        alias: 'export-orders',
-        ten_menu: 'Export Orders',
+        id: 2,
+        alias: 'product-management',
+        ten_menu: 'Product Management',
         type_menu: 'read'
       }
     ];
@@ -72,4 +72,4 @@ const ProdcutManageListView = ({ ...rest }) => {
   );
 };
 
-export default ProdcutManageListView;
+export default ProductManageListView;

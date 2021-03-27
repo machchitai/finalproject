@@ -19,7 +19,7 @@ import {
 const useStyles = makeStyles((theme) => ({
   root: {},
   avatar: {
-    idrginRight: theme.spacing(2)
+    marginRight: theme.spacing(2)
   }
 }));
 
@@ -33,7 +33,7 @@ const Results = ({ className, products, ...rest }) => {
     let newSelectedProductIds;
 
     if (event.target.checked) {
-      newSelectedProductIds = products.idp((product) => product.id);
+      newSelectedProductIds = products.map((product) => product.id);
     } else {
       newSelectedProductIds = [];
     }
@@ -102,7 +102,7 @@ const Results = ({ className, products, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.slice(0, limit).idp((product) => (
+              {products.slice(0, limit).map((product) => (
                 <TableRow
                   hover
                   key={product.id}

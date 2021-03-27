@@ -136,7 +136,7 @@ router.post('/admin-authorized', (req, res) => {
             JOIN users u
             ON u.id = t.user_id
             JOIN role_distribution_table rdt
-            ON u.role = rdt.id_roles
+            ON u.id_role = rdt.id_roles
             JOIN menu_admin mad
             ON rdt.id_menu_admin = mad.id
             WHERE t.token = ?`, 

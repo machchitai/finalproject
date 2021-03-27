@@ -78,7 +78,7 @@ const DialogActions = withStyles((theme) => ({
 
 const Results = ({ className, rolelists, ...rest }) => {
   const classes = useStyles();
-  const [selectedDonhangIds, setSelectedDonhangIds] = useState([]);
+  const [selectedOrderIds, setSelectedOrderIds] = useState([]);
   const [page, setPage] = useState(0);
   const [open, setOpen] = React.useState(false);
   const [currentRole, setCurrentRole] = useState([]);
@@ -93,27 +93,27 @@ const Results = ({ className, rolelists, ...rest }) => {
       newSelectedDonhangIds = [];
     }
 
-    setSelectedDonhangIds(newSelectedDonhangIds);
+    setSelectedOrderIds(newSelectedDonhangIds);
   };
 
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedDonhangIds.indexOf(id);
-    let newSelectedDonhangIds = [];
+    const selectedIndex = selectedOrderIds.indexOf(id);
+    let newSelectedOrderIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(selectedDonhangIds, id);
+      newSelectedOrderIds = newSelectedOrderIds.concat(selectedOrderIds, id);
     } else if (selectedIndex === 0) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(selectedDonhangIds.slice(1));
-    } else if (selectedIndex === selectedDonhangIds.length - 1) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(selectedDonhangIds.slice(0, -1));
+      newSelectedOrderIds = newSelectedOrderIds.concat(selectedOrderIds.slice(1));
+    } else if (selectedIndex === selectedOrderIds.length - 1) {
+      newSelectedOrderIds = newSelectedOrderIds.concat(selectedOrderIds.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedDonhangIds = newSelectedDonhangIds.concat(
-        selectedDonhangIds.slice(0, selectedIndex),
-        selectedDonhangIds.slice(selectedIndex + 1)
+      newSelectedOrderIds = newSelectedOrderIds.concat(
+        selectedOrderIds.slice(0, selectedIndex),
+        selectedOrderIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedDonhangIds(newSelectedDonhangIds);
+    setSelectedOrderIds(newSelectedOrderIds);
   };
 
   const handleLimitChange = () => {
@@ -178,11 +178,11 @@ const Results = ({ className, rolelists, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedDonhangIds.length === rolelists.length}
+                    checked={selectedOrderIds.length === rolelists.length}
                     color="primary"
                     indeterminate={
-                      selectedDonhangIds.length > 0
-                      && selectedDonhangIds.length < rolelists.length
+                      selectedOrderIds.length > 0
+                      && selectedOrderIds.length < rolelists.length
                     }
                     onChange={handleSelectAll}
                   />
@@ -196,15 +196,15 @@ const Results = ({ className, rolelists, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rolelists.idp((distributerole) => (
+              {rolelists.map((distributerole) => (
                 <TableRow
                   hover
                   key={distributerole.id}
-                  selected={selectedDonhangIds.indexOf(distributerole.id) !== -1}
+                  selected={selectedOrderIds.indexOf(distributerole.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedDonhangIds.indexOf(distributerole.id) !== -1}
+                      checked={selectedOrderIds.indexOf(distributerole.id) !== -1}
                       onChange={(event) => handleSelectOne(event, distributerole.id)}
                       value="true"
                     />
@@ -217,7 +217,7 @@ const Results = ({ className, rolelists, ...rest }) => {
                   <TableCell>
                     <div>
                       <Button variant="outlined" color="primary" onClick={() => { handleClickOpen(distributerole.id); }}>
-                        {distributerole.ten_quyen}
+                        {distributerole.role}
                       </Button>
                     </div>
                   </TableCell>
@@ -225,7 +225,7 @@ const Results = ({ className, rolelists, ...rest }) => {
               ))}
             </TableBody>
           </Table>
-          {currentRole.idp((itemcurrentrole) => {
+          {currentRole.map((itemcurrentrole) => {
             return <div>{ itemcurrentrole.menu_name }</div>;
           })}
           <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
@@ -234,7 +234,7 @@ const Results = ({ className, rolelists, ...rest }) => {
             </DialogTitle>
             <DialogContent dividers>
               {
-                rest.menuadminlist.idp((menuadmin) => {
+                rest.menuadminlist.map((menuadmin) => {
                   return (
                     <FormControlLabel
                       key={menuadmin.id}

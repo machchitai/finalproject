@@ -11,7 +11,6 @@ import LatestProducts from './LatestProducts';
 import TasksProgress from './TasksProgress';
 import TotalCustomers from './TotalCustomers';
 import TotalProfit from './TotalProfit';
-import ThongKeDonHang from './ThongKeDonHang';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -70,15 +69,6 @@ const Dashboard = () => {
             xs={12}
           >
             <TotalProfit />
-          </Grid>
-          <Grid
-            item
-            lg={8}
-            md={12}
-            xl={9}
-            xs={12}
-          >
-            <ThongKeDonHang />
           </Grid>
           <Grid
             item

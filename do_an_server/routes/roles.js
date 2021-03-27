@@ -76,7 +76,7 @@ router.put('/:id_role', function(req, res, next) {
                         if (err) throw err; // not connected!
 
                         console.log(i);
-                        if(i == mang_update.length - 1){
+                        if(i == update.length - 1){
                             
                             res.json(
                                 {

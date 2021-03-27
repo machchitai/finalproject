@@ -11,7 +11,7 @@ const ExportOrderForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (orderid.length >= 16) {
+    if (orderid.length) {
       axios.get(`http://localhost:4000/orders/search/${orderid}`)
         .then((response) => {
           console.log(response);
@@ -21,7 +21,7 @@ const ExportOrderForm = () => {
           console.log(err);
         });
     } else {
-      alert('Code too short!');
+      alert('Please insert order ID!');
     }
   };
 

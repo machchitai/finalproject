@@ -1,7 +1,7 @@
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import React, { useEffect, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { ThemeProvider, Button } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core';
 import GlobalStyles from 'src/components/GlobalStyles';
 import 'src/mixins/chartjs';
 import theme from 'src/theme';
@@ -14,9 +14,6 @@ const App = () => {
   const [cookies] = useCookies(['token']);
   const [isLogedin, setIsLogedIn] = useState(false);
 
-  const handleTestCookie = () => {
-  };
-
   useEffect(() => {
     console.log(cookies.token);
     if (cookies && cookies.token) {
@@ -28,7 +25,6 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       {(isLogedin) ? routing : <LoginView processLogedInState={setIsLogedIn} />}
-      <Button onClick={handleTestCookie}>Test Cookie</Button>
     </ThemeProvider>
   );
 };
