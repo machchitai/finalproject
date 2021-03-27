@@ -1,0 +1,30 @@
+.chon-do-tuoi .list-image-chon-do-tuoi img{
+    width: 50%;
+    height: 100%;
+    filter:grayscale(100%);
+    transition:0.3s;
+}
+.chon-do-tuoi .header-chon-do-tuoi{
+    position:fixed;
+    z-index: 2;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid white;
+}
+.chon-do-tuoi .header-chon-do-tuoi .logo a{
+    color: #9c2217;
+    text-decoration: none;
+    font-size: larger;
+}
+.chon-do-tuoi .header-chon-do-tuoi .logo img{
+    width:30px;
+    margin-right: 5px;
+}
+.chon-do-tuoi .header-chon-do-tuoi .title{
+    text-align: center;
+    font-weight: bold;
+    color:white;
+}
+.chon-do-tuoi .list-image-chon-do-tuoi img:hover{
+    filter:grayscale(0%)
+}
