@@ -42,12 +42,12 @@ const Toolbar = ({ className, ...rest }) => {
         <Button className={classes.exportButton}>
           Export
         </Button>
-        <Link to="/app/users/them">
+        <Link to="/app/users/add">
           <Button
             color="primary"
             variant="contained"
           >
-            Thêm User
+            Add User
           </Button>
         </Link>
       </Box>
@@ -70,7 +70,7 @@ const Toolbar = ({ className, ...rest }) => {
                     </InputAdornment>
                   )
                 }}
-                placeholder="Search customer"
+                placeholder="Search user"
                 variant="outlined"
               />
             </Box>

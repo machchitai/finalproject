@@ -25,7 +25,7 @@ const routes = [
       { path: 'dashboard', element: <DashboardView /> },
       { path: 'users', element: <UserListView /> },
       { path: 'users/:id_user', element: <FormUserEdit /> },
-      { path: 'users/them', element: <FormUsersAdd /> },
+      { path: 'users/add', element: <FormUsersAdd /> },
       { path: 'product-management', element: <ProductManageListView alias="product-management" /> },
       { path: 'distribute-role', element: <RoleDist alias="distribute-role" /> },
       { path: 'export-orders', element: <ExportOrder alias="export-orders" /> },

@@ -126,15 +126,15 @@ const FormUsersAdd = () => {
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.tai_khoan && errors.tai_khoan)}
+                  error={Boolean(touched.username && errors.username)}
                   fullWidth
-                  helperText={touched.tai_khoan && errors.tai_khoan}
-                  label="Tài khoản"
+                  helperText={touched.username && errors.username}
+                  label="Username"
                   margin="normal"
-                  name="tai_khoan"
+                  name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.tai_khoan}
+                  value={userInfo.username}
                   variant="outlined"
                 />
                 <TextField
@@ -151,16 +151,16 @@ const FormUsersAdd = () => {
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.mat_khau && errors.mat_khau)}
+                  error={Boolean(touched.password && errors.password)}
                   fullWidth
-                  helperText={touched.mat_khau && errors.mat_khau}
-                  label="Mật Khẩu"
+                  helperText={touched.password && errors.password}
+                  label="Password"
                   margin="normal"
-                  name="mat_khau"
+                  name="password"
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="password"
-                  value={userInfo.mat_khau}
+                  value={userInfo.password}
                   variant="outlined"
                 />
                 <Box

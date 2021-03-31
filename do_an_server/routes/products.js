@@ -10,7 +10,7 @@ var pool  = mysql.createPool({
     database        : 'fashionstore'
 });
 
-/* GET users listing. */
+/* GET products listing. */
 router.get('/', function(req, res, next) {
 
     pool.getConnection(function(err, connection) {

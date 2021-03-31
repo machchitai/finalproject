@@ -100,13 +100,13 @@ const Results = ({ className, customers, ...rest }) => {
                   Email
                 </TableCell>
                 <TableCell>
-                  Address
+                  Location
                 </TableCell>
                 <TableCell>
                   Phone
                 </TableCell>
                 <TableCell>
-                  Register Date
+                  Registration date
                 </TableCell>
               </TableRow>
             </TableHead>

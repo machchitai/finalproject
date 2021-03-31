@@ -20,6 +20,36 @@ var pool  = mysql.createPool({
 
 const { UpgradeRequired } = require('http-errors');
 
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+
+    pool.getConnection(function(err, connection) {
+        if (err) throw err; // not connected!
+
+        var query_limit = req.query.limit;
+        
+        if(query_limit){
+            query_limit = ' LIMIT '+ query_limit;
+        }
+        else {
+            query_limit = ''
+        }
+       
+        // Use the connection
+        connection.query('SELECT * FROM users ORDER BY name DESC' + query_limit, function (error, results, fields) {
+          // When done with the connection, release it.
+          connection.release();
+       
+          // Handle error after the release.
+          if (error) throw error;
+       
+          res.json(results);
+        });
+    });
+
+    
+});
+
 
 router.post('/admin-log-in', (req, res) => {
     var keys = ['keyboard cat'];
@@ -119,6 +149,8 @@ router.post('/admin-log-in', (req, res) => {
         });
     });
 })
+
+
 
 
 router.post('/admin-authorized', (req, res) => {

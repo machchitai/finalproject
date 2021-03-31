@@ -29,44 +29,44 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Results = ({ className, customers, ...rest }) => {
+const Results = ({ className, users, ...rest }) => {
   const classes = useStyles();
-  const [selectedCustomerIds, setSelectedCustomerIds] = useState([]);
+  const [selecteduserIds, setSelecteduserIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
   const [open, setOpen] = React.useState(false);
   const [userIdCurrent, setUserIdCurrent] = useState('');
 
   const handleSelectAll = (event) => {
-    let newSelectedCustomerIds;
+    let newSelecteduserIds;
 
     if (event.target.checked) {
-      newSelectedCustomerIds = customers.map((customer) => customer.id);
+      newSelecteduserIds = users.map((user) => user.id);
     } else {
-      newSelectedCustomerIds = [];
+      newSelecteduserIds = [];
     }
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
+    setSelecteduserIds(newSelecteduserIds);
   };
 
   const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedCustomerIds.indexOf(id);
-    let newSelectedCustomerIds = [];
+    const selectedIndex = selecteduserIds.indexOf(id);
+    let newSelecteduserIds = [];
 
     if (selectedIndex === -1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds, id);
+      newSelecteduserIds = newSelecteduserIds.concat(selecteduserIds, id);
     } else if (selectedIndex === 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(1));
-    } else if (selectedIndex === selectedCustomerIds.length - 1) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(selectedCustomerIds.slice(0, -1));
+      newSelecteduserIds = newSelecteduserIds.concat(selecteduserIds.slice(1));
+    } else if (selectedIndex === selecteduserIds.length - 1) {
+      newSelecteduserIds = newSelecteduserIds.concat(selecteduserIds.slice(0, -1));
     } else if (selectedIndex > 0) {
-      newSelectedCustomerIds = newSelectedCustomerIds.concat(
-        selectedCustomerIds.slice(0, selectedIndex),
-        selectedCustomerIds.slice(selectedIndex + 1)
+      newSelecteduserIds = newSelecteduserIds.concat(
+        selecteduserIds.slice(0, selectedIndex),
+        selecteduserIds.slice(selectedIndex + 1)
       );
     }
 
-    setSelectedCustomerIds(newSelectedCustomerIds);
+    setSelecteduserIds(newSelecteduserIds);
   };
 
   const handlePageChange = (event, newPage) => {
@@ -110,14 +110,14 @@ const Results = ({ className, customers, ...rest }) => {
 
   const handleRemoveUserSelected = () => {
     console.log('delete user');
-    console.log(selectedCustomerIds);
+    console.log(selecteduserIds);
 
-    axios.delete('http://localhost:4000/users', {
+    axios.delete('http://localhost:4000/user', {
       auth: {
         username: 'machchitai',
         password: '123456'
       },
-      data: selectedCustomerIds
+      data: selecteduserIds
     })
       .then((response) => {
         console.log(response);
@@ -154,11 +154,11 @@ const Results = ({ className, customers, ...rest }) => {
               <TableRow>
                 <TableCell padding="checkbox">
                   <Checkbox
-                    checked={selectedCustomerIds.length === customers.length}
+                    checked={selecteduserIds.length === users.length}
                     color="primary"
                     indeterminate={
-                      selectedCustomerIds.length > 0
-                      && selectedCustomerIds.length < customers.length
+                      selecteduserIds.length > 0
+                      && selecteduserIds.length < users.length
                     }
                     onChange={handleSelectAll}
                   />
@@ -167,10 +167,7 @@ const Results = ({ className, customers, ...rest }) => {
                   Name
                 </TableCell>
                 <TableCell>
-                  Email
-                </TableCell>
-                <TableCell>
-                  Location
+                  Username
                 </TableCell>
                 <TableCell>
                   Email
@@ -181,38 +178,35 @@ const Results = ({ className, customers, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {customers.slice(0, limit).map((customer) => (
+              {users.slice(0, limit).map((user) => (
                 <TableRow
                   hover
-                  key={customer._id}
-                  selected={selectedCustomerIds.indexOf(customer._id) !== -1}
+                  key={user.id}
+                  selected={selecteduserIds.indexOf(user.id) !== -1}
                 >
                   <TableCell padding="checkbox">
                     <Checkbox
-                      checked={selectedCustomerIds.indexOf(customer._id) !== -1}
-                      onChange={(event) => handleSelectOne(event, customer._id)}
+                      checked={selecteduserIds.indexOf(user.id) !== -1}
+                      onChange={(event) => handleSelectOne(event, user.id)}
                       value="true"
                     />
                   </TableCell>
                   <TableCell>
-                    {customer.name}
+                    {user.name}
                   </TableCell>
                   <TableCell>
-                    {customer.tai_khoan}
+                    {user.username}
                   </TableCell>
                   <TableCell>
-                    {customer.mat_khau}
+                    {user.email}
                   </TableCell>
                   <TableCell>
-                    {customer.email}
-                  </TableCell>
-                  <TableCell>
-                    <Link to={`/app/users/${customer._id}`}>
+                    <Link to={`/app/users/${user.id}`}>
                       <Button variant="contained" color="primary">
                         <EditIcon />
                       </Button>
                     </Link>
-                    <Button variant="contained" color="secondary" style={{ background: '#e23f0e' }} onClick={() => { handleDeleteUser(customer._id); }}>
+                    <Button variant="contained" color="secondary" style={{ background: '#e23f0e' }} onClick={() => { handleDeleteUser(user.id); }}>
                       <DeleteIcon />
                     </Button>
                   </TableCell>
@@ -224,7 +218,7 @@ const Results = ({ className, customers, ...rest }) => {
       </PerfectScrollbar>
       <TablePagination
         component="div"
-        count={customers.length}
+        count={users.length}
         onChangePage={handlePageChange}
         onChangeRowsPerPage={handleLimitChange}
         page={page}
@@ -237,7 +231,7 @@ const Results = ({ className, customers, ...rest }) => {
 
 Results.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
+  users: PropTypes.array.isRequired
 };
 
 export default Results;

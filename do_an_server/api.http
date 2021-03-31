@@ -210,6 +210,8 @@ GET http://localhost:4000/phan-quyen/2
 ###
 GET http://localhost:4000/menu-quan-tri
 
+###
+GET http://localhost:4000/orders/search/abcd_000000000095
 
 ###
 PUT http://localhost:4000/phan-quyen/4

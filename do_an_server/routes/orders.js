@@ -180,7 +180,7 @@ router.get('/:id_export_order', function(req, res, next){
 
 router.get('/search/:order_id', function(req, res, next){
     pool.getConnection(function(err, connection) {
-        connection.query(`SELECT * 
+        connection.query(`SELECT o.*
         FROM orders o
         JOIN detail_orders do
         ON o.id = do.orders_id

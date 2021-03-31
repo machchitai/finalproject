@@ -10,7 +10,6 @@ import { useCookies } from 'react-cookie';
 import LoginView from 'src/views/auth/LoginView';
 
 const App = () => {
-  const routing = useRoutes(routes);
   const [cookies] = useCookies(['token']);
   const [isLogedin, setIsLogedIn] = useState(false);
 
@@ -20,6 +19,8 @@ const App = () => {
       setIsLogedIn(true);
     }
   }, []);
+
+  const routing = useRoutes(routes);
 
   return (
     <ThemeProvider theme={theme}>

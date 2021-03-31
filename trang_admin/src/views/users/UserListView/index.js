@@ -8,7 +8,7 @@ import axios from 'axios';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
 import Results from './Results';
-import data from './data';
+// import data from './data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,16 +29,16 @@ const UserListView = () => {
   const [valueChange, setValueChange] = useState(0);
 
   useEffect(() => {
-    setListUsers(data);
-    axios.get('http://localhost:4000/users/')
-      .then((dataReponse) => {
-        console.log(dataReponse.data.data);
-        setListUsers(dataReponse.data.data);
+  // setListUsers(data);
+    axios.get('http://localhost:4000/user/')
+      .then((response) => {
+        console.log(response);
+        setListUsers(response.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [valueChange]);
+  }, []);
 
   const handleChangeComponent = () => {
     setValueChange(valueChange + 1);
@@ -57,11 +57,10 @@ const UserListView = () => {
         <Toolbar processInput={handleProcessSearchValue} />
         {valueSearch}
         <Box mt={3}>
-          <div>Test Page</div>
           <Results
-            customers={
+            users={
               listUsers.filter((temp) => {
-                return temp.tai_khoan.indexOf(valueSearch) >= 0;
+                return temp.name.indexOf(valueSearch) >= 0;
               })
             }
             handleChangeComponent={handleChangeComponent}

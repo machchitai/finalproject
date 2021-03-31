@@ -8,7 +8,6 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import {
   Avatar,
   Box,
-  Button,
   Divider,
   Drawer,
   Hidden,
@@ -74,7 +73,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     {
       href: '/app/users',
       icon: UsersIcon,
-      title: 'User\'s Accounts'
+      title: 'Manage Users'
     },
     {
       href: '/app/products',
@@ -84,7 +83,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     {
       href: '/app/product-management',
       icon: ShoppingBagIcon,
-      title: 'Products Management'
+      title: 'Manage Products '
     },
     {
       href: '/app/distribute-role',
@@ -94,7 +93,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     {
       href: '/app/account',
       icon: UserIcon,
-      title: 'Account'
+      title: 'Edit account '
     },
     {
       href: '/app/settings',
@@ -110,11 +109,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       href: '/register',
       icon: UserPlusIcon,
       title: 'Register'
-    },
-    {
-      href: '/app/test',
-      icon: UserPlusIcon,
-      title: 'Test'
     },
     {
       href: '/404',
@@ -200,40 +194,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
             />
           ))}
         </List>
-      </Box>
-      <Box flexGrow={1} />
-      <Box
-        p={2}
-        m={2}
-        bgcolor="background.dark"
-      >
-        <Typography
-          align="center"
-          gutterBottom
-          variant="h4"
-        >
-          Need more?
-        </Typography>
-        <Typography
-          align="center"
-          variant="body2"
-        >
-          Upgrade to PRO version and access 20 more screens
-        </Typography>
-        <Box
-          display="flex"
-          justifyContent="center"
-          mt={2}
-        >
-          <Button
-            color="primary"
-            component="a"
-            href="https://react-material-kit.devias.io"
-            variant="contained"
-          >
-            See PRO version
-          </Button>
-        </Box>
       </Box>
     </Box>
   );
