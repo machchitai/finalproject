@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import VideoIntro from '../module/VideoIntro';
-import ButtonContact from '../module/buttonContact'
+import ButtonContact from '../module/ButtonContact'
 import MiniSlider from '../module/MiniBanner';
 import PromoProduct from '../module/PromoProduct';
 import HotProduct from '../module/HotProduct';
-import Collection from '../module/Catelogy';
+import Collection from '../module/Category';
 import NewItem from '../module/NewItem';
 import GetNotification from '../module/GetNotification';
 

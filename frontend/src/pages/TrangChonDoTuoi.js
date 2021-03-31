@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from '@material-ui/core/Link';
 
 const TrangChonDoTuoi = () => {
+    useEffect(() => {
+        localStorage.clear('person');
+    },[])
+
     const handleChangeAge = (event) =>{
-        //console.log(event.target.name);
-        localStorage.setItem('person', event.target.name );
+        localStorage.setItem('person', event.target.name);
     }
     const handleAutoChangeAge = () =>{
         localStorage.setItem('person','adults');

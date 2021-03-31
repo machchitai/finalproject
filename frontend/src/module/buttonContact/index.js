@@ -14,7 +14,7 @@ const index = () => {
 
             <Link to = "#">
                 <div className = 'all_buton_contact button_messenger'>   
-                    <i class="bi bi-chat-dots-fill"></i>
+                    <img src="./images/icon/messenger.png" class="img-responsive" alt="Image" />
                 </div>
             </Link>
 
