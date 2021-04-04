@@ -1,0 +1,26 @@
+.list-search{
+    margin:50px;
+}
+.list-search .option{
+    border:1px solid #A9A9A9;
+    margin-bottom: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.list-search .option label{
+    display: block;
+}
+.list-search .select-price input{
+    outline: none;
+    padding: 5px 5px 5px 10px;
+    border-radius: 6px;
+    border: 1px solid #A9A9A9;
+} 
+.list-search .option input{
+    margin-right: 10px;
+    
+}
+.list-search .option .title-option{
+    font-weight: bolder;
+    font-size: 20px;
+}

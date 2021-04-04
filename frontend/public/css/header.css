@@ -145,3 +145,6 @@
     overflow: hidden;
     margin-left:10px;
 }
+.header .all-item-hidden .container-xxl a:hover{
+    color:#000;
+}

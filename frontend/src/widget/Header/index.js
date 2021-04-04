@@ -59,7 +59,12 @@ const Header = () => {
                         <ul className="navbar-nav mr-auto ">
                             <div class="col-sm-2 item-menu item-home">
                                 <li className="nav-item active">
-                                    <a className="nav-link" href="#">HOME</a>
+                                    <Link 
+                                        className="nav-link" 
+                                        to="/"
+                                    >
+                                        HOME
+                                    </Link>
                                 </li>
                             </div>
 

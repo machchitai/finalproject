@@ -46,4 +46,25 @@ $(document).ready(function(){
             $(".all-item-hidden").css("display","none")
         });
     });
+
+    //scroll Top in Header 
+    $(window).scroll(function(event) {
+        
+        var pos_body = $('html,body').scrollTop();
+        //console.log(pos_body);
+        if(pos_body > 500){
+            $('.button-scroll-top').css('display','flex');
+        }else{
+            $('.button-scroll-top').css('display','none');
+        }
+        
+    });
+    $('.button-scroll-top').click(function(){
+        $('html,body').animate({scrollTop: 0},1200);
+    });
+
+    // hover chip
+
+    //click chip
+    
 });
