@@ -6,6 +6,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import ExportOrderForm from './ExportOrderForm';
+import Results from './Results';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -30,6 +31,9 @@ const ExportOrder = () => {
       <Container maxWidth={false}>
         <Box mt={3}>
           <ExportOrderForm />
+        </Box>
+        <Box mt={3}>
+          <Results />
         </Box>
       </Container>
     </Page>

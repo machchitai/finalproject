@@ -8,7 +8,6 @@ import axios from 'axios';
 import Page from 'src/components/Page';
 import Toolbar from './Toolbar';
 import Results from './Results';
-// import data from './data';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,16 +28,15 @@ const UserListView = () => {
   const [valueChange, setValueChange] = useState(0);
 
   useEffect(() => {
-  // setListUsers(data);
     axios.get('http://localhost:4000/user/')
-      .then((response) => {
-        console.log(response);
-        setListUsers(response.data);
+      .then((dataReponse) => {
+        console.log(dataReponse.data);
+        setListUsers(dataReponse.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [valueChange]);
 
   const handleChangeComponent = () => {
     setValueChange(valueChange + 1);
@@ -60,7 +58,7 @@ const UserListView = () => {
           <Results
             users={
               listUsers.filter((temp) => {
-                return temp.name.indexOf(valueSearch) >= 0;
+                return temp.username.indexOf(valueSearch) >= 0;
               })
             }
             handleChangeComponent={handleChangeComponent}

@@ -29,8 +29,9 @@ const FormUserEdit = () => {
   const [userInfo, setUserInfo] = useState({
     name: '',
     username: '',
+    email: '',
     password: '',
-    email: ''
+    id_role: ''
   });
 
   const [typeError, setTypeError] = useState('');
@@ -39,9 +40,9 @@ const FormUserEdit = () => {
   useEffect(() => {
     console.log(param);
     axios.get(`http://localhost:4000/user/${param.id_user}`)
-      .then((reponse) => {
-        console.log(reponse);
-        setUserInfo(reponse.data.data);
+      .then((response) => {
+        console.log(response);
+        setUserInfo(response.data[0]);
       })
       .catch((err) => {
         console.log(err);
@@ -58,7 +59,7 @@ const FormUserEdit = () => {
         setMessageError('Update successful!');
         setTimeout(() => {
           navigate('/app/users', { replace: true });
-        }, 10000);
+        }, 1000);
       })
       .catch((err) => {
         console.log(err);
@@ -78,7 +79,7 @@ const FormUserEdit = () => {
   return (
     <Page
       className={classes.root}
-      title="Register"
+      title="Edit User"
     >
       <Box
         display="flex"
@@ -105,21 +106,14 @@ const FormUserEdit = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Create new user
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    gutterBottom
-                    variant="body2"
-                  >
-                    Use your email to create new account
+                    Update user
                   </Typography>
                 </Box>
                 <TextField
                   error={Boolean(touched.name && errors.name)}
                   fullWidth
                   helperText={touched.name && errors.name}
-                  label="Full name"
+                  label="Name"
                   margin="normal"
                   name="name"
                   onBlur={handleBlur}
@@ -163,6 +157,18 @@ const FormUserEdit = () => {
                   onChange={handleChange}
                   type="password"
                   value={userInfo.password}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(touched.id_role && errors.id_role)}
+                  fullWidth
+                  helperText={touched.id_role && errors.id_role}
+                  label="RoleID"
+                  margin="normal"
+                  name="id_role"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={userInfo.id_role}
                   variant="outlined"
                 />
                 <Box my={2}>

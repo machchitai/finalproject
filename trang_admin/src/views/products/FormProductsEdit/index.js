@@ -1,13 +1,10 @@
-import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
-  Link,
   TextField,
   Typography,
   makeStyles
@@ -25,59 +22,67 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormUsersAdd = () => {
+const FormUserEdit = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
+  const param = useParams();
+  const [productInfo, setProductInfo] = useState({
+    categoryid: '',
     name: '',
-    username: '',
-    password: '',
-    email: ''
+    description: '',
+    price: '',
+    vendor: '',
+    color: '',
+    size: '',
+    quantity: ''
   });
-
-  const [policy, setPolicy] = useState(false);
 
   const [typeError, setTypeError] = useState('');
   const [messageError, setMessageError] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    console.log(param);
+    axios.get(`http://localhost:4000/products/${param.id_product}`)
+      .then((response) => {
+        console.log(response);
+        setProductInfo(response.data[0]);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleSubmit = (event) => {
-    setIsSubmitting(true);
     event.preventDefault();
-    console.log(userInfo);
-    axios.post('http://localhost:4000/user/sign-up', userInfo)
+    console.log(productInfo);
+    axios.put(`http://localhost:4000/products/${param.id_product}`, productInfo)
       .then((data) => {
         console.log(data);
         setTypeError('success');
-        setMessageError('Create user successful!');
+        setMessageError('Update successful!');
         setTimeout(() => {
-          navigate('/app/users', { replace: true });
+          navigate('/app/product-management', { replace: true });
         }, 1000);
       })
       .catch((err) => {
         console.log(err);
         setTypeError('error');
-        setMessageError('Create user failed!');
-        setIsSubmitting(false);
+        setMessageError('Update failed!');
       });
   };
 
   const handleChange = (e) => {
     console.log(e.target.name, e.target.value);
-    setUserInfo({
-      ...userInfo,
+    setProductInfo({
+      ...productInfo,
       [e.target.name]: e.target.value
     });
-  };
-
-  const handleChangePolicy = () => {
-    setPolicy(!policy);
   };
 
   return (
     <Page
       className={classes.root}
-      title="Register"
+      title="Edit User"
     >
       <Box
         display="flex"
@@ -95,6 +100,7 @@ const FormUsersAdd = () => {
             {({
               errors,
               handleBlur,
+              isSubmitting,
               touched
             }) => (
               <form onSubmit={handleSubmit}>
@@ -103,26 +109,19 @@ const FormUsersAdd = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Create new user
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    gutterBottom
-                    variant="body2"
-                  >
-                    Use your email to create new account
+                    Update product info
                   </Typography>
                 </Box>
                 <TextField
                   error={Boolean(touched.name && errors.name)}
                   fullWidth
                   helperText={touched.name && errors.name}
-                  label="Full name"
+                  label="Name"
                   margin="normal"
                   name="name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.name}
+                  value={productInfo.name}
                   variant="outlined"
                 />
                 <TextField
@@ -134,7 +133,7 @@ const FormUsersAdd = () => {
                   name="username"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.username}
+                  value={productInfo.username}
                   variant="outlined"
                 />
                 <TextField
@@ -147,7 +146,7 @@ const FormUsersAdd = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="email"
-                  value={userInfo.email}
+                  value={productInfo.email}
                   variant="outlined"
                 />
                 <TextField
@@ -160,53 +159,21 @@ const FormUsersAdd = () => {
                   onBlur={handleBlur}
                   onChange={handleChange}
                   type="password"
-                  value={userInfo.password}
+                  value={productInfo.password}
                   variant="outlined"
                 />
                 <TextField
                   error={Boolean(touched.id_role && errors.id_role)}
                   fullWidth
                   helperText={touched.id_role && errors.id_role}
-                  label="Role ID"
+                  label="RoleID"
                   margin="normal"
                   name="id_role"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.id_role}
+                  value={productInfo.id_role}
                   variant="outlined"
                 />
-                <Box
-                  alignItems="center"
-                  display="flex"
-                  ml={-1}
-                >
-                  <Checkbox
-                    checked={policy}
-                    name="policy"
-                    onChange={handleChangePolicy}
-                  />
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the
-                    {' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </Box>
-                {Boolean(touched.policy && errors.policy) && (
-                  <FormHelperText error>
-                    {errors.policy}
-                  </FormHelperText>
-                )}
                 <Box my={2}>
                   <Button
                     color="primary"
@@ -216,9 +183,23 @@ const FormUsersAdd = () => {
                     type="submit"
                     variant="contained"
                   >
-                    Sign up now
+                    Update now
                   </Button>
                 </Box>
+                <Link to="/app/product_management/">
+                  <Box my={2}>
+                    <Button
+                      color="primary"
+                      disabled={isSubmitting}
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Link>
               </form>
             )}
           </Formik>
@@ -228,4 +209,4 @@ const FormUsersAdd = () => {
   );
 };
 
-export default FormUsersAdd;
+export default FormUserEdit;

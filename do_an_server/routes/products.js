@@ -14,19 +14,10 @@ var pool  = mysql.createPool({
 router.get('/', function(req, res, next) {
 
     pool.getConnection(function(err, connection) {
-        if (err) throw err; // not connected!
-
-        var query_limit = req.query.limit;
-        
-        if(query_limit){
-            query_limit = ' LIMIT '+ query_limit;
-        }
-        else {
-            query_limit = ''
-        }
+        if (err) throw err; // not connected!        
        
         // Use the connection
-        connection.query('SELECT * FROM product ORDER BY price DESC' + query_limit, function (error, results, fields) {
+        connection.query('SELECT * FROM product' , function (error, results, fields) {
           // When done with the connection, release it.
           connection.release();
        
@@ -38,6 +29,47 @@ router.get('/', function(req, res, next) {
     });
 
     
+});
+
+router.get('/:id_product', function(req, res, next) {
+
+
+    pool.getConnection(function(err, connection) {
+        if (err) throw err; // not connected!
+       
+        // Use the connection
+        connection.query(`SELECT * FROM users WHERE id = '${req.params.id_product}'`, function (error, results, fields) {
+          // When done with the connection, release it.
+          connection.release();
+       
+          // Handle error after the release.
+          if (error) throw error;
+       
+          res.json(results);
+        });
+    });
+    
+});
+
+router.post('/add', (req, res) => {
+    pool.getConnection(function(err, connection) {
+        if (err) throw err;
+    
+    connection.query(`INSERT INTO product(categoryid, name, description, price, vendor, color, size, quantity)
+                        VALUES(?, ?, ?, ?, ?, ?, ?, ?)`, 
+        [req.body.categoryid, req.body.name, req.body.description, req.body.price, req.body.vendor, req.body.color, req.body.size, req.body.quantity],
+        function (error, results, fields){
+            if (error) throw error;
+
+            var response = {
+                error: false,
+                message: "create product successful"
+            }
+            res.json(response);
+
+            connection.release();
+        });
+    });
 });
 
 

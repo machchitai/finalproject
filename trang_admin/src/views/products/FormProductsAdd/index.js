@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import {
   Box,
   Button,
-  Checkbox,
   Container,
-  FormHelperText,
-  Link,
   TextField,
   Typography,
   makeStyles
@@ -25,17 +22,19 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const FormUsersAdd = () => {
+const FormProductsAdd = () => {
   const classes = useStyles();
   const navigate = useNavigate();
-  const [userInfo, setUserInfo] = useState({
+  const [productInfo, setProductInfo] = useState({
+    categoryid: '',
     name: '',
-    username: '',
-    password: '',
-    email: ''
+    description: '',
+    price: '',
+    vendor: '',
+    color: '',
+    size: '',
+    quantity: ''
   });
-
-  const [policy, setPolicy] = useState(false);
 
   const [typeError, setTypeError] = useState('');
   const [messageError, setMessageError] = useState('');
@@ -44,34 +43,30 @@ const FormUsersAdd = () => {
   const handleSubmit = (event) => {
     setIsSubmitting(true);
     event.preventDefault();
-    console.log(userInfo);
-    axios.post('http://localhost:4000/user/sign-up', userInfo)
+    console.log(productInfo);
+    axios.post('http://localhost:4000/products/add', productInfo)
       .then((data) => {
         console.log(data);
         setTypeError('success');
-        setMessageError('Create user successful!');
+        setMessageError('Add product successful!');
         setTimeout(() => {
-          navigate('/app/users', { replace: true });
+          navigate('/app/product-management', { replace: true });
         }, 1000);
       })
       .catch((err) => {
         console.log(err);
         setTypeError('error');
-        setMessageError('Create user failed!');
+        setMessageError('Add product failed!');
         setIsSubmitting(false);
       });
   };
 
   const handleChange = (e) => {
     console.log(e.target.name, e.target.value);
-    setUserInfo({
-      ...userInfo,
+    setProductInfo({
+      ...productInfo,
       [e.target.name]: e.target.value
     });
-  };
-
-  const handleChangePolicy = () => {
-    setPolicy(!policy);
   };
 
   return (
@@ -82,7 +77,7 @@ const FormUsersAdd = () => {
       <Box
         display="flex"
         flexDirection="column"
-        height="100%"
+        // height="100%"
         justifyContent="center"
       >
         <Container maxWidth="sm">
@@ -103,110 +98,106 @@ const FormUsersAdd = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Create new user
-                  </Typography>
-                  <Typography
-                    color="textSecondary"
-                    gutterBottom
-                    variant="body2"
-                  >
-                    Use your email to create new account
+                    Add new product
                   </Typography>
                 </Box>
+                <TextField
+                  error={Boolean(touched.categoryid && errors.categoryid)}
+                  fullWidth
+                  helperText={touched.categoryid && errors.categoryid}
+                  label="Product category"
+                  margin="normal"
+                  name="categoryid"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.categoryid}
+                  variant="outlined"
+                />
                 <TextField
                   error={Boolean(touched.name && errors.name)}
                   fullWidth
                   helperText={touched.name && errors.name}
-                  label="Full name"
+                  label="Product name"
                   margin="normal"
                   name="name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.name}
+                  value={productInfo.name}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.username && errors.username)}
+                  error={Boolean(touched.description && errors.description)}
                   fullWidth
-                  helperText={touched.username && errors.username}
-                  label="Username"
+                  helperText={touched.description && errors.description}
+                  label="Description"
                   margin="normal"
-                  name="username"
+                  name="description"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.username}
+                  value={productInfo.description}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.email && errors.email)}
+                  error={Boolean(touched.price && errors.price)}
                   fullWidth
-                  helperText={touched.email && errors.email}
-                  label="Email Address"
+                  helperText={touched.price && errors.price}
+                  label="Price"
                   margin="normal"
-                  name="email"
+                  name="price"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  type="email"
-                  value={userInfo.email}
+                  value={productInfo.price}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.password && errors.password)}
+                  error={Boolean(touched.vendor && errors.vendor)}
                   fullWidth
-                  helperText={touched.password && errors.password}
-                  label="Password"
+                  helperText={touched.vendor && errors.vendor}
+                  label="Vendor"
                   margin="normal"
-                  name="password"
+                  name="vendor"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  type="password"
-                  value={userInfo.password}
+                  type="vendor"
+                  value={productInfo.vendor}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.id_role && errors.id_role)}
+                  error={Boolean(touched.color && errors.color)}
                   fullWidth
-                  helperText={touched.id_role && errors.id_role}
-                  label="Role ID"
+                  helperText={touched.color && errors.color}
+                  label="Color"
                   margin="normal"
-                  name="id_role"
+                  name="color"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={userInfo.id_role}
+                  value={productInfo.color}
                   variant="outlined"
                 />
-                <Box
-                  alignItems="center"
-                  display="flex"
-                  ml={-1}
-                >
-                  <Checkbox
-                    checked={policy}
-                    name="policy"
-                    onChange={handleChangePolicy}
-                  />
-                  <Typography
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    I have read the
-                    {' '}
-                    <Link
-                      color="primary"
-                      component={RouterLink}
-                      to="#"
-                      underline="always"
-                      variant="h6"
-                    >
-                      Terms and Conditions
-                    </Link>
-                  </Typography>
-                </Box>
-                {Boolean(touched.policy && errors.policy) && (
-                  <FormHelperText error>
-                    {errors.policy}
-                  </FormHelperText>
-                )}
+                <TextField
+                  error={Boolean(touched.size && errors.size)}
+                  fullWidth
+                  helperText={touched.size && errors.size}
+                  label="Size"
+                  margin="normal"
+                  name="size"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.size}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(touched.quantity && errors.quantity)}
+                  fullWidth
+                  helperText={touched.quantity && errors.quantity}
+                  label="Quantity"
+                  margin="normal"
+                  name="quantity"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.quantity}
+                  variant="outlined"
+                />
                 <Box my={2}>
                   <Button
                     color="primary"
@@ -216,7 +207,7 @@ const FormUsersAdd = () => {
                     type="submit"
                     variant="contained"
                   >
-                    Sign up now
+                    Add Product
                   </Button>
                 </Box>
               </form>
@@ -228,4 +219,4 @@ const FormUsersAdd = () => {
   );
 };
 
-export default FormUsersAdd;
+export default FormProductsAdd;

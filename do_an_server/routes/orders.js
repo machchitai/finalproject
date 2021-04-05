@@ -2,8 +2,8 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-// var nodemailer = require('nodemailer');
-// var smtpTransport = require('nodeidiler-smtp-transport');
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
 
 var pool  = mysql.createPool({
     connectionLimit : 10,
@@ -14,14 +14,14 @@ var pool  = mysql.createPool({
 });
 
 
-// var transporter = nodemailer.createTransport(smtpTransport({
-//     service: 'gidil',
-//     host: 'smtp.gidil.com',
-//     auth: {
-//       user: 'machchitai@gidil.com',
-//       pass: '123123'
-//     }
-// }));
+var transporter = nodemailer.createTransport(smtpTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    auth: {
+      user: 'machchitai@gmail.com',
+      pass: 'Machchitai17594'
+    }
+}));
 
 
 router.post('/', function(req, res, next) {
@@ -30,6 +30,14 @@ router.post('/', function(req, res, next) {
 
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
+
+        var date_ob = new Date();
+
+        var date = ("0" + date_ob.getDate()).slice(-2);
+
+        var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+        var year = date_ob.getFullYear();
 
         var tong_tien = 0;
 
@@ -45,7 +53,7 @@ router.post('/', function(req, res, next) {
                 req.body.email,
                 req.body.receiver_address,
                 req.body.receiver_phone,
-                '2020-02-26 00:00:00',
+                req.body.created_date = year + "-" + month + "-" + date,
                 1,
                 '',
                 sum,
@@ -53,11 +61,7 @@ router.post('/', function(req, res, next) {
                 req.body.receiver_address,
                 req.body.receiver_phone,
             ]
-            , function (error, results, fields) {
-            // When done with the connection, release it.
-
-                
-            
+            , function (error, results, fields) {       
                 // Handle error after the release.
                 if (error) throw error;
             
@@ -121,21 +125,22 @@ router.post('/', function(req, res, next) {
                                                 <div>Bạn mua đơn hàng: <a href="http://localhost:3000/don-hang/${id_export_order}">${id_export_order}</a></div>
                                             `
 
-                                            // var maililOptions = {
-                                            //     from: 'hungbookstoreonline@gidil.com',
-                                            //     to: req.body.eidil,
-                                            //     subject: 'Cám ơn bạn đã đặt hàng tại Shop Online',
-                                            //     //text: html_string
-                                            //     html: html_string
-                                            // };
+                                            var maililOptions = {
+                                                from: 'machchitai@gmail.com',
+                                                to: req.body.email,
+                                                subject: 'Cám ơn bạn đã đặt hàng tại Shop Online',
+                                                //text: html_string
+                                                html: html_string
+                                            };
 
-                                            // transporter.sendmail(idilOptions, function(error, info){
-                                            //     if (error) {
-                                            //       console.log(error);
-                                            //     } else {
-                                            //       console.log('Eidil sent: ' + info.response);
-                                            //     }
-                                            // }); 
+                                            transporter.sendmail(mailOptions, function(error, info){
+                                                if (error) {
+                                                  console.log(error);
+                                                } else {
+                                                  console.log('Eidil sent: ' + info.response);
+                                                }
+                                            }); 
+
                                             console.log(html_string);
         
                                             connection.release();

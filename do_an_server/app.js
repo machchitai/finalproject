@@ -8,7 +8,6 @@ var cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
-var productRouter = require ('./routes/product');
 var productManageRouter = require ('./routes/products');
 var ordersRouter = require ('./routes/orders');
 var menuadminRouter = require ('./routes/menuadmin');
@@ -30,11 +29,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
-app.use('/product', productRouter);
-app.use('/product-management', productManageRouter);
+app.use('/products', productManageRouter);
 app.use('/orders', ordersRouter);
-app.use('/menu-admin', menuadminRouter);
-app.use('/distribute-role', roledistRouter);
+app.use('/menuadmin', menuadminRouter);
+app.use('/roledist', roledistRouter);
 
 app.use((req, res, next) => {
   //console.log(Date.now() + '-' + req.method + '-' + req.url);

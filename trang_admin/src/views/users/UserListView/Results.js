@@ -34,7 +34,7 @@ const Results = ({ className, users, ...rest }) => {
   const [selecteduserIds, setSelecteduserIds] = useState([]);
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const [userIdCurrent, setUserIdCurrent] = useState('');
 
   const handleSelectAll = (event) => {
@@ -170,7 +170,13 @@ const Results = ({ className, users, ...rest }) => {
                   Username
                 </TableCell>
                 <TableCell>
+                  Password
+                </TableCell>
+                <TableCell>
                   Email
+                </TableCell>
+                <TableCell>
+                  RoleID
                 </TableCell>
                 <TableCell>
                   Action
@@ -198,7 +204,13 @@ const Results = ({ className, users, ...rest }) => {
                     {user.username}
                   </TableCell>
                   <TableCell>
+                    {user.password}
+                  </TableCell>
+                  <TableCell>
                     {user.email}
+                  </TableCell>
+                  <TableCell>
+                    {user.id_role}
                   </TableCell>
                   <TableCell>
                     <Link to={`/app/users/${user.id}`}>

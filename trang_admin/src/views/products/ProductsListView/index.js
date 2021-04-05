@@ -47,7 +47,7 @@ const ProductManageListView = ({ ...rest }) => {
       alert('You do not have permission');
     }
 
-    axios.get('http://localhost:4000/product-management/')
+    axios.get('http://localhost:4000/products/')
       .then((response) => {
         console.log(response);
         setProduct(response.data);

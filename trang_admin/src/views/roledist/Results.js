@@ -125,7 +125,7 @@ const Results = ({ className, rolelists, ...rest }) => {
 
   const handleClickOpen = (idrole) => {
     setselectedRole(idrole);
-    axios.get(`http://localhost:4000/distribute-role/${idrole}`)
+    axios.get(`http://localhost:4000/roledist/${idrole}`)
       .then((results) => {
         setCurrentRole(results.data);
       })
@@ -137,7 +137,7 @@ const Results = ({ className, rolelists, ...rest }) => {
 
   const handleSavedistributerole = () => {
     console.log('save');
-    axios.put(`http://localhost:4000/distribute-role/${selectedRole}`, currentRole)
+    axios.put(`http://localhost:4000/roledist/${selectedRole}`, currentRole)
       .then((response) => {
         console.log(response);
       })

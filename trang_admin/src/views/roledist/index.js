@@ -23,14 +23,14 @@ const RoleDist = () => {
   const [menuadmin, setMenuAdmin] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/distribute-role')
+    axios.get('http://localhost:4000/roledist')
       .then((results) => {
         setRoleList(results.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    axios.get('http://localhost:4000/menu-admin')
+    axios.get('http://localhost:4000/menuadmin')
       .then((results) => {
         setMenuAdmin(results.data);
       })
