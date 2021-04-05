@@ -11,7 +11,6 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
   Button,
   Dialog,
@@ -32,8 +31,6 @@ const useStyles = makeStyles((theme) => ({
 const Results = ({ className, products, ...rest }) => {
   const classes = useStyles();
   const [selectedproductIds, setSelectedproductIds] = useState([]);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
   const [open, setOpen] = useState(false);
   const [productIdCurrent, setproductIdCurrent] = useState('');
 
@@ -67,14 +64,6 @@ const Results = ({ className, products, ...rest }) => {
     }
 
     setSelectedproductIds(newSelectedproductIds);
-  };
-
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
-  };
-
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
   };
 
   const handleClose = () => {
@@ -190,7 +179,7 @@ const Results = ({ className, products, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.slice(0, limit).map((product) => (
+              {products.map((product) => (
                 <TableRow
                   hover
                   key={product.id}
@@ -240,15 +229,6 @@ const Results = ({ className, products, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={products.length}
-        onChangePage={handlePageChange}
-        onChangeRowsPerPage={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
     </Card>
   );
 };

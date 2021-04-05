@@ -38,7 +38,7 @@ router.get('/:id_product', function(req, res, next) {
         if (err) throw err; // not connected!
        
         // Use the connection
-        connection.query(`SELECT * FROM users WHERE id = '${req.params.id_product}'`, function (error, results, fields) {
+        connection.query(`SELECT * FROM product WHERE id = '${req.params.id_product}'`, function (error, results, fields) {
           // When done with the connection, release it.
           connection.release();
        

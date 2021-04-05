@@ -113,10 +113,22 @@ const FormUserEdit = () => {
                   </Typography>
                 </Box>
                 <TextField
+                  error={Boolean(touched.categoryid && errors.categoryid)}
+                  fullWidth
+                  helperText={touched.categoryid && errors.categoryid}
+                  label="Product category"
+                  margin="normal"
+                  name="categoryid"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.categoryid}
+                  variant="outlined"
+                />
+                <TextField
                   error={Boolean(touched.name && errors.name)}
                   fullWidth
                   helperText={touched.name && errors.name}
-                  label="Name"
+                  label="Product name"
                   margin="normal"
                   name="name"
                   onBlur={handleBlur}
@@ -125,53 +137,76 @@ const FormUserEdit = () => {
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.username && errors.username)}
+                  error={Boolean(touched.description && errors.description)}
                   fullWidth
-                  helperText={touched.username && errors.username}
-                  label="Username"
+                  helperText={touched.description && errors.description}
+                  label="Description"
                   margin="normal"
-                  name="username"
+                  name="description"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={productInfo.username}
+                  value={productInfo.description}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.email && errors.email)}
+                  error={Boolean(touched.price && errors.price)}
                   fullWidth
-                  helperText={touched.email && errors.email}
-                  label="Email Address"
+                  helperText={touched.price && errors.price}
+                  label="Price"
                   margin="normal"
-                  name="email"
+                  name="price"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  type="email"
-                  value={productInfo.email}
+                  value={productInfo.price}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.password && errors.password)}
+                  error={Boolean(touched.vendor && errors.vendor)}
                   fullWidth
-                  helperText={touched.password && errors.password}
-                  label="Password"
+                  helperText={touched.vendor && errors.vendor}
+                  label="Vendor"
                   margin="normal"
-                  name="password"
+                  name="vendor"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  type="password"
-                  value={productInfo.password}
+                  type="vendor"
+                  value={productInfo.vendor}
                   variant="outlined"
                 />
                 <TextField
-                  error={Boolean(touched.id_role && errors.id_role)}
+                  error={Boolean(touched.color && errors.color)}
                   fullWidth
-                  helperText={touched.id_role && errors.id_role}
-                  label="RoleID"
+                  helperText={touched.color && errors.color}
+                  label="Color"
                   margin="normal"
-                  name="id_role"
+                  name="color"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={productInfo.id_role}
+                  value={productInfo.color}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(touched.size && errors.size)}
+                  fullWidth
+                  helperText={touched.size && errors.size}
+                  label="Size"
+                  margin="normal"
+                  name="size"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.size}
+                  variant="outlined"
+                />
+                <TextField
+                  error={Boolean(touched.quantity && errors.quantity)}
+                  fullWidth
+                  helperText={touched.quantity && errors.quantity}
+                  label="Quantity"
+                  margin="normal"
+                  name="quantity"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.quantity}
                   variant="outlined"
                 />
                 <Box my={2}>
@@ -186,11 +221,10 @@ const FormUserEdit = () => {
                     Update now
                   </Button>
                 </Box>
-                <Link to="/app/product_management/">
+                <Link to="/app/product-management/">
                   <Box my={2}>
                     <Button
-                      color="primary"
-                      disabled={isSubmitting}
+                      color="secondary"
                       fullWidth
                       size="large"
                       type="submit"

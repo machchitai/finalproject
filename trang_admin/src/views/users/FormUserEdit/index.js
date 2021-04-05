@@ -7,7 +7,8 @@ import {
   Container,
   TextField,
   Typography,
-  makeStyles
+  makeStyles,
+  Link
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Page from 'src/components/Page';
@@ -183,6 +184,19 @@ const FormUserEdit = () => {
                     Update now
                   </Button>
                 </Box>
+                <Link to="/app/users/">
+                  <Box my={2}>
+                    <Button
+                      color="secondary"
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Link>
               </form>
             )}
           </Formik>

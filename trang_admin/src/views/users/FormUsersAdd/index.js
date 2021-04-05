@@ -219,6 +219,19 @@ const FormUsersAdd = () => {
                     Sign up now
                   </Button>
                 </Box>
+                <Link to="/app/users/">
+                  <Box my={2}>
+                    <Button
+                      color="secondary"
+                      fullWidth
+                      size="large"
+                      type="submit"
+                      variant="contained"
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Link>
               </form>
             )}
           </Formik>

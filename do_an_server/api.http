@@ -235,7 +235,7 @@ Content-Type: application/json
 GET http://localhost:4000/user/1
 
 ###
-GET http://localhost:4000/products/1
+GET http://localhost:4000/products/13
 
 ###
 POST http://localhost:4000/products/add
