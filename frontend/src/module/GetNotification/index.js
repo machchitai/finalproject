@@ -11,8 +11,8 @@ const GetNotification = () => {
                 <p>
                     Enter your email to get notification
                 </p>
-                <input type="text" class="form-control" id="" placeholder="Nhập email của bạn" />
-                <button type="button" class="btn btn-default">Gửi</button>
+                <input type="text" className="form-control" id="" placeholder="Nhập email của bạn" />
+                <button type="button" className="btn btn-default">Gửi</button>
             </div>
         </div>
     );

@@ -39,26 +39,25 @@ const Header = () => {
             
             <nav className="navbar navbar-expand-lg header">
                 <div className="collapse navbar-collapse" id="navbarContent">
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 link-logo">
-
-                        <Link to="/">
+                    <div className="col-xs-2 col-sm-2 col-md-2 col-lg-2 link-logo">
+                        <Link to="/" >
                             <div className=".link-logo">
-                                <div class="col-sm-4 link-img">
+                                <div className="col-sm-4 link-img">
                                     <img src="./images/logo.png"  alt="Image" width="80"/>
                                 </div>
 
-                                <div class="col-sm-8 text-link">
-                                    <h4>Vereinfachen</h4>
+                                <div className="col-sm-8 text-link">
+                                    Vereinfachen
                                 </div>
                             </div>
                         </Link>
 
                     </div>
                 
-                    <div class="col-sm-8 list-item-menu">
+                    <div className="col-sm-8 list-item-menu">
                         <ul className="navbar-nav mr-auto ">
-                            <div class="col-sm-2 item-menu item-home">
-                                <li className="nav-item active">
+                            <div className="col-sm-2 item-menu item-home active">
+                                <li className="nav-item">
                                     <Link 
                                         className="nav-link" 
                                         to="/"
@@ -68,7 +67,7 @@ const Header = () => {
                                 </li>
                             </div>
 
-                            <div class=" col-sm-3 item-menu all-item-menu">
+                            <div className=" col-sm-3 item-menu all-item-menu">
                                 <li className="nav-item">
                                     <Link 
                                         className="nav-link" 
@@ -76,7 +75,7 @@ const Header = () => {
                                     >
                                         ALL ITEMS
                                         <div className="i-rotate-up">
-                                            <i class="bi bi-chevron-compact-down" />
+                                            <i className="bi bi-chevron-compact-down" />
                                         </div>
                                         
                                     </Link>
@@ -84,7 +83,7 @@ const Header = () => {
                                 
                             </div>
                             
-                            <div class="col-sm-2 item-menu item-sales">
+                            <div className="col-sm-2 item-menu item-sales">
                                 <li className="nav-item">
                                     <Link 
                                         className="nav-link" 
@@ -95,7 +94,7 @@ const Header = () => {
                                 </li>
                             </div>
 
-                            <div class="col-sm-3 item-menu">
+                            <div className="col-sm-3 item-menu">
                                 <li className="nav-item ">
                                     <Link 
                                         className="nav-link" 
@@ -106,7 +105,7 @@ const Header = () => {
                                     </Link>
                                 </li>
                             </div>
-                            <div class="col-sm-2 change-adult">
+                            <div className="col-sm-2 change-adult">
                                 <li className="nav-item upper-case">
                                     <Link to={getPerson}
                                         className="nav-link"
@@ -120,14 +119,14 @@ const Header = () => {
                         </ul>
                    </div>
                    <div className="col-sm-2 list-icon-menu">
-                        <div class="action-search" id="action-search">
-                            <i class="bi bi-search" />
+                        <div className="action-search" id="action-search">
+                            <i className="bi bi-search" />
                             <div className="search-box-hidden" id="search-box-hidden">
                                 <div className="div-space"></div>
                                 <div className="tool-search">
                                     <input type='text' placeholder="tìm kiếm ..."/>
                                     <button type="button">
-                                        <i class="bi bi-search"/>
+                                        <i className="bi bi-search"/>
                                     </button>
                                 </div>
                                 <div className="result-search">
@@ -135,8 +134,8 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="action-save" id="action-save">
-                            <i class="bi bi-heart" />
+                        <div className="action-save" id="action-save">
+                            <i className="bi bi-heart" />
                             <div className="save-box-hidden" id="save-box-hidden">
                                 <div className="div-space"></div>
                                 <div className="result-save">
@@ -144,14 +143,14 @@ const Header = () => {
                                 </div>
                             </div>
                         </div>
-                        <div class="action-buy">
+                        <div className="action-buy">
                             <Link to="gio-hang">
-                                <i class="bi bi-bag" />
+                                <i className="bi bi-bag" />
                             </Link>
                         </div>
-                        <div class="action-acc">
+                        <div className="action-acc">
                             <Link to="tai-khoan">
-                                <i class="bi bi-person" />
+                                <i className="bi bi-person" />
                             </Link>
                         </div>
                     </div>
@@ -160,7 +159,7 @@ const Header = () => {
                 <div className="all-item-hidden">
                     <div className="container-xxl">
                         <div className="row upper-case">
-                            <div class="col-sm-3 border-right">
+                            <div className="col-sm-3 border-right">
                                 {
                                     allItem.map((item) => {
                                         return (<div 
@@ -174,7 +173,7 @@ const Header = () => {
                                     })
                                 }
                             </div>
-                            <div class="col-sm-3 border-right">
+                            <div className="col-sm-3 border-right">
                                 {
                                     contentChild != undefined? contentChild[0].child.map((item) => {
                                         return <div 
@@ -187,22 +186,22 @@ const Header = () => {
                                     }) : ''
                                 }
                             </div>
-                            <div class="col-sm-6 border-right promotion-all-item">
+                            <div className="col-sm-6 border-right promotion-all-item">
                                 <div className='row'>
-                                    <div class="col-sm-5 cont-img">
+                                    <div className="col-sm-5 cont-img">
                                         <Link 
                                             to="/promo"
                                             className=""
                                         >
-                                            <img src="./images/promo/sale-50.jpg" class="img-responsive" alt="sale 50%" />
+                                            <img src="./images/promo/sale-50.jpg" className="img-responsive" alt="sale 50%" />
                                         </Link>
                                     </div>
-                                    <div class="col-sm-5 cont-img">
+                                    <div className="col-sm-5 cont-img">
                                         <Link 
                                             to="/promo"
                                             className=""
                                         >
-                                            <img src="./images/promo/sale-balo.jpg" class="img-responsive" alt="sale balo 79k" />
+                                            <img src="./images/promo/sale-balo.jpg" className="img-responsive" alt="sale balo 79k" />
                                         </Link>
                                     </div>
                                 </div>

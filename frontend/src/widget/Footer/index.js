@@ -6,14 +6,12 @@ const Footer = () => {
             <div className="container-footer">
                 <div className="row container-fluid">
 
-                    <div class="col-sm-2 col-md-2 col-lg-2 find-store">
-                        
-                        <img src="./images/store.png" class="img-responsive" alt="Vereinfachen store" />
-                        <button type="button" class="btn btn-success">TÌM CỬA HÀNG</button>
+                    <div className="col-sm-2 col-md-2 col-lg-2 find-store">
+                        <img src="./images/store.png" className="img-responsive" alt="Vereinfachen store" />
+                        <button type="button" className="btn btn-success">TÌM CỬA HÀNG</button>
                     </div>
                     
-                    
-                    <div class="col-sm-10 col-md-10 col-lg-10">
+                    <div className="col-sm-10 col-md-10 col-lg-10">
                         <div className="row">
                             
                             <div className="col-sm-4 col-md-4 col-lg-4">
@@ -51,7 +49,7 @@ const Footer = () => {
 
                         <div className="row">
                             
-                            <div class=" col-sm-4 col-md-4 col-lg-4">
+                            <div className=" col-sm-4 col-md-4 col-lg-4">
                                 <ul>
                                     <li className="font-header-normal mb-3 bolder font-color-white">Vereinfachen SOCIAL</li>
                                     <li className="option-footer"></li>
@@ -59,12 +57,12 @@ const Footer = () => {
                                     <li className="option-footer"></li>
                                 </ul>
                             </div>
-                            <div class=" col-sm-4 col-md-4 col-lg-4 copyright color-footer">
+                            <div className=" col-sm-4 col-md-4 col-lg-4 copyright color-footer">
                                 Copyright © 2020 Vereinfachen. All rights reserved.
                             </div>
-                            <div class=" col-sm-4 col-md-4 col-lg-4 footer-logo">
+                            <div className=" col-sm-4 col-md-4 col-lg-4 footer-logo">
                                 
-                                <img src="../images/logo.png" class="img-responsive" alt="Image" />
+                                <img src="../images/logo.png" className="img-responsive" alt="Image" />
                                 Vereinfachen
                                 
                             </div>

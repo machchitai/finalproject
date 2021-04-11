@@ -5,14 +5,48 @@
          url(./fonts/Million_Dreams.otf) format('opentype');
     font-display: block;
 }
+@keyframes fade-in{
+    from {top: 150px;opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fade-out{
+    to {opacity: 0;top: 120px;display: none;}
+}
+@keyframes move-in{
+    from {right: -100px;}
+    to {right:0px;}
+}
+@keyframes move-out{
+    from {right: 0px;}
+    to {right:-100px;}
+}
 a{
     color: black;
+}
+a:hover{
+    color: black;
+    text-decoration: none;
 }
 *{
     font-family: Million_Dreams;
 }
 ul {
     list-style-type: none;
+}
+.btn-circle{
+    border:1px solid black;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+    border-radius: 40px;
+    height: 60px;
+    width: 60px;
+    margin-left: 10px;
+    background-color: white;
+}
+.btn-circle:focus{
+    outline: 0;
 }
 .border-right{
     border-right:1px solid #A9A9A9;
@@ -70,95 +104,16 @@ ul {
     -webkit-box-sizing: border-box;
     padding:0 60px;
 }
-.color-footer{
-    color: #808080;
-}
-
-
-/* Footer */
-.footer{
-    background-color: #434343;
-    padding: 70px 0 50px;
-}
-.footer .option-footer{
-    color:#cccccc;
-}
-.footer .option-footer:hover{
-    color:#f15e2c;
-}
-.footer-logo {
-    color: #808080;
-    font-size: 50px;
-}
-.footer .find-store{
-    text-align: center;
-}
-.footer .find-store img{
-    width:300px;
-}
-.footer-logo img{
-    width:100px;
-    filter: grayscale(50);
-}
-/* button */
-.buttons .button-scroll-top{
-    position: fixed;
-    right: 0;
-    bottom: 100px;
-    cursor: pointer;
-    z-index:2;
-    display: none;
-    flex-direction: column;
-    font-size: 30px;
-    align-content: center; 
-    
-}
-.buttons .all_buton_contact{
-    width:50px;
-    height:55px;
-    position: fixed;
-    right: 0;
-    padding: 5px 5px 5px 10px;
-    border-radius: 10px 0 0 10px;
-    box-shadow: 0px 5px 10px #000;
-    cursor: pointer;
-    background: #fff;
-    font-size:30px; 
+/* alias */
+.alias-page {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.6s;
-    z-index:2;
+    margin-top: 50px;
+    font-size: 40px;
+    background-color: #eeeeee;
+    padding:10px;
 }
-.buttons .all_buton_contact:hover{
-    width: 170px;
-    justify-content: left;
-}
-.buttons .all_buton_contact:hover:after{
-    margin-left: 15px;
-    font-size: 22px;
-}
-.buttons .button_facebook{
-    top: 30%;
-    color: #0a82ed;
-}
-.buttons .button_messenger img{
-    width: 30px;
-}
-.buttons .button_messenger{
-    top: 36%;
-    color: #2196f3;
-}
-.buttons .button_twiter{
-    top: 42%;
-    color:#1da1f2;
-}
-.buttons .button_twiter:hover:after{
-    content: "Twiter";
-}
-.buttons .button_messenger:hover:after{
-    content: "Messenger";
-}
-.buttons .button_facebook:hover:after{
-    content: "Facebook";
+.alias-page a:hover{
+    text-decoration: none;
 }

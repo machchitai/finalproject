@@ -15,7 +15,7 @@ const Categogry = () => {
                         
                         <div className="layout-item">
                             <div className="images-catelogy-item">
-                                <img src="./images/collection/product1.png" class="img-responsive" alt="Image"/>
+                                <img src="./images/collection/product1.png" className="img-responsive" alt="Image"/>
                             </div>
                             
                             <div className="title-item-catelory">
@@ -27,7 +27,7 @@ const Categogry = () => {
                         
                         <div className="layout-item">
                         <div className="images-catelogy-item">
-                                <img src="./images/collection/product1.png" class="img-responsive" alt="Image"/>
+                                <img src="./images/collection/product1.png" className="img-responsive" alt="Image"/>
                             </div>
                             <div className="title-item-catelory">
                                 Catelogry 2
@@ -38,7 +38,7 @@ const Categogry = () => {
                         
                         <div className="layout-item">
                         <div className="images-catelogy-item">
-                                <img src="./images/collection/product1.png" class="img-responsive" alt="Image"/>
+                                <img src="./images/collection/product1.png" className="img-responsive" alt="Image"/>
                             </div>
                             <div className="title-item-catelory">
                                 Catelogry 3

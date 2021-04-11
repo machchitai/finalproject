@@ -1,31 +1,56 @@
-import {React} from 'react';
+import {React ,useEffect,useState} from 'react';
 import ToolOption from '../module/ToolOption';
+import ItemProduct from '../module/ItemProduct';
+import BuyNowHidden from '../module/BuyNowHidden';
+import Data from '../module/Data';
+import Alias from '../module/Alias';
 
 const TrangSanPham = () => {
+    const [buyNowBox,setBuyNowBox] = useState(false);
+    const [inforToBuyNow , setInforToBuyNow] = useState({
+        'img':'',
+        'producer':'',
+        'name':'',
+        'price':'',
+        'color': '',
+        'size' : ''
+    });
+    const DataProduct = Data;
+    
+    useEffect(() => {
+        handleChangeBuyNow();
+    },[inforToBuyNow])
+    const handleChangeBuyNow = (id) => {
+        setBuyNowBox(!buyNowBox);
+
+        if( id != '' && typeof(id) != 'undefined') {
+            const infor = DataProduct.find(item => item.id == id)
+            
+            setInforToBuyNow({
+                'img' : infor.avatar,
+                'producer':infor.producer,
+                'name':infor.name,
+                'price':infor.gia,
+                'color': infor.mau,
+                'size' : infor.size
+            });
+        }
+        //console.log(inforToBuyNow)
+    }
     return (
         <>
-            <div className="container-fluid">
-                <div className="col-sm-2 list-search">
-                    
-                    <ToolOption />
-                </div>
-                <div className="col-sm-10">
-                    <div className="row">
-                        <div className="col-sm-3">
-
-                        </div>
-                        <div className="col-sm-3">
-                            
-                        </div>
-                        <div className="col-sm-3">
-                            
-                        </div>
-                        <div className="col-sm-3">
-                            
-                        </div>
+            <Alias alias={[{'name':'Trang Chủ','link':'/'},{'name':'Sản Phẩm','link':'/san-pham'}]}/>
+            <div className="container-fluid product-page">
+                <div className = "row">
+                    <div className="col-sm-2 list-search">
+                        <ToolOption />
+                    </div>
+                    <div className="col-sm-10 list-product">
+                        <ItemProduct handleChangeBuyNow={handleChangeBuyNow} />
                     </div>
                 </div>
             </div>
+            <BuyNowHidden buyNowBox={buyNowBox} inforToBuyNow={inforToBuyNow} />
         </>
     );
 };

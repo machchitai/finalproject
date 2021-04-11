@@ -1,0 +1,95 @@
+.detail-infor-box{
+    margin: 50px 0px;
+    padding: 0px 10%;
+}
+/* infor product */
+
+.infor-product{
+    margin:150px 0px;
+    position: relative;
+    padding-left: 100px;
+}
+.infor-product .name-producer , .zoom-img  .name-producer , .buy-now-hidden-box .name-producer{
+    font-size:15px;
+    color: rgb(128, 128, 128);
+}
+.infor-product .name-product , .zoom-img  .name-product , .buy-now-hidden-box .name-product{
+    font-size: 30px;
+    font-weight: bold;
+}
+.infor-product .size-and-color input , .zoom-img .buy-product .size-and-color input , .buy-now-hidden-box .size-and-color input{
+    width: 100%;
+    margin-right: 20px;
+    height: 50px;
+    font-size: 20px;
+    text-align: left;
+    padding-left: 10px;
+    background-color: white;
+    border: 1px solid black;
+    outline: none;
+}
+.infor-product .size-and-color , .zoom-img .buy-product .size-and-color, .buy-now-hidden-box .size-and-color{
+    color:rgba(0, 0, 0, 0.5);
+    display:flex;
+    font-size: 12px;
+    margin: 10px 0;
+}
+.infor-product > button , .zoom-img .buy-product button , .buy-now-hidden-box .btn-buy-now button{
+    width: 100%;
+    margin: 20px 0;
+    background-color: black;
+    color:white;
+    border: none;
+    outline: none;
+}
+.infor-product .more-content{
+    margin-top: 50px;
+}
+.infor-product .more-content i {
+    font-size: 25px;
+    margin-right: 10px;
+}
+.infor-product .content-product{
+    font-size: small;
+}
+
+/* List image product */
+.list-img img{
+    width: 100%;
+    cursor: crosshair;
+}
+.zoom-img{
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    display: none;
+}
+.zoom-img img{
+    width: 100%;
+    cursor: pointer;
+}
+.zoom-img .buy-product{
+    background-color: white;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+.zoom-img .buy-product .btn-buy{
+    display:flex;
+}
+.zoom-img > button{
+    outline: none;
+    border: none;
+    position: fixed;
+    top: 0;
+    right: 50px;
+    background-color: transparent;
+    font-size: 70px;
+}

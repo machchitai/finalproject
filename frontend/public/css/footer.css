@@ -1,0 +1,28 @@
+/* Footer */
+.color-footer{
+    color: #808080;
+}
+.footer{
+    background-color: #434343;
+    padding: 70px 0 50px;
+}
+.footer .option-footer{
+    color:#cccccc;
+}
+.footer .option-footer:hover{
+    color:#f15e2c;
+}
+.footer-logo {
+    color: #808080;
+    font-size: 50px;
+}
+.footer .find-store{
+    text-align: center;
+}
+.footer .find-store img{
+    width:300px;
+}
+.footer-logo img{
+    width:100px;
+    filter: grayscale(50);
+}

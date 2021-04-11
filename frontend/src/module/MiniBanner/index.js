@@ -8,7 +8,7 @@ const MiniBanner = () => {
                 <li>
                     <div className="about-service">
                         <div className="icon-service">
-                            <i class="bi bi-truck" />
+                            <i className="bi bi-truck" />
                             </div>
                         <div className="content-mini-slider" >
                             <div className="title-mini-slider">
@@ -41,7 +41,7 @@ const MiniBanner = () => {
 
                 <li>
                     <div className="about-service">
-                        <i class="bi bi-gift" />
+                        <i className="bi bi-gift" />
 
                         <div className="content-mini-slider">
                             <div className="title-mini-slider">
@@ -57,7 +57,7 @@ const MiniBanner = () => {
 
                 <li>
                     <div className="about-service">
-                        <i class="bi bi-check-circle" />
+                        <i className="bi bi-check-circle" />
 
                         <div className="content-mini-slider">
                             <div className="title-mini-slider">

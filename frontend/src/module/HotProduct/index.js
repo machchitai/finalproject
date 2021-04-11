@@ -18,12 +18,12 @@ const HotProduct = () => {
 
                 <div className="row">
                     
-                    <div class="col-sm-4 col-md-4 col-lg-4 big-hot-product-item">
+                    <div className="col-sm-4 col-md-4 col-lg-4 big-hot-product-item">
                         <Card>
                             <CardActionArea>
                                 <CardMedia
                                 component="img"
-                                image="./images/product/product1.png"
+                                image="./images/hot-product/product1.png"
                                 title="images"
                                 />
                                 <CardContent>
@@ -39,15 +39,15 @@ const HotProduct = () => {
                     </div>
 
                     
-                    <div class="col-sm-8 col-md-8 col-lg-8">
+                    <div className="col-sm-8 col-md-8 col-lg-8">
                         <div className="row">
                             
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -62,12 +62,12 @@ const HotProduct = () => {
                                 </Card>
                             </div>
 
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -81,12 +81,12 @@ const HotProduct = () => {
                                     </CardActionArea>
                                 </Card>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -100,12 +100,12 @@ const HotProduct = () => {
                                     </CardActionArea>
                                 </Card>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -123,12 +123,12 @@ const HotProduct = () => {
 
                         </div>
                         <div className="row">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -143,12 +143,12 @@ const HotProduct = () => {
                                 </Card>
                             </div>
 
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -162,12 +162,12 @@ const HotProduct = () => {
                                     </CardActionArea>
                                 </Card>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>
@@ -181,12 +181,12 @@ const HotProduct = () => {
                                     </CardActionArea>
                                 </Card>
                             </div>
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
+                            <div className="col-xs-3 col-sm-3 col-md-3 col-lg-3 hot-product-item">
                                 <Card>
                                     <CardActionArea>
                                         <CardMedia
                                         component="img"
-                                        image="./images/product/product1.png"
+                                        image="./images/hot-product/product1.png"
                                         title="images"
                                         />
                                         <CardContent>

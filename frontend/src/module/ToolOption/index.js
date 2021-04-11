@@ -5,23 +5,23 @@ import {useState} from 'react';
 const ToolOption = () => {
     const [Default,SetDefault] = useState([
         {
-            'key':'0 đến 99k',
+            'key':'0 đến 499k',
             'var':'outlined'
         },
         {
-            'key':'100k đến 199k',
+            'key':'500k đến 999k',
             'var':'outlined'
         },
         {
-            'key':'200k đến 299k',
+            'key':'1.000k đến 4.999k',
             'var':'outlined'
         },
         {
-            'key':'300k đến 399k',
+            'key':'5.000k đến 9.999k',
             'var':'outlined'
         },
         {
-            'key':'400k đến 799k',
+            'key':'10.000k đến 20.000k',
             'var':'outlined'
         }
     ]);
@@ -50,21 +50,21 @@ const ToolOption = () => {
                 <div className='select-gender option'>
                     <div className="title-option">Giới tính</div>
                     
-                    <div class="radio">
+                    <div className="radio">
                         <label>
                             <input 
                                 type="radio" 
-                                name="gender" 
-                                id="input" 
-                                checked="checked" 
+                                name="gender"
+                                id="input"
+                                checked="checked"
                             />
                             Nam
                         </label>
                         <label>
                             <input 
-                                type="radio" 
-                                name="gender" 
-                                id="input" 
+                                type="radio"
+                                name="gender"
+                                id="input"
                             />
                             Nữ
                         </label>
@@ -77,11 +77,11 @@ const ToolOption = () => {
                         {
                             Default.map(item => {
                                 return <Chip 
-                                        color="primary" 
-                                        variant= {item.var} 
+                                        color="primary"
+                                        variant= {item.var}
                                         label={item.key}
                                         onClick={isDefault}
-                                    />  
+                                    />
                             })
                         }
                     </div>
@@ -96,7 +96,7 @@ const ToolOption = () => {
                 <div className='select-prioritize option'>
                     <div className="title-option">Ưu tiên</div>
                     
-                    <div class="radio">
+                    <div className="radio">
                         <label>
                             <input type="radio" name="prioritize" id="input" value="" />
                             Giá giảm dần
@@ -119,7 +119,7 @@ const ToolOption = () => {
                         </label>
                     </div>
                 </div>
-                <button class="btn btn-primary">Áp dụng</button>
+                <button className="btn btn-primary">Áp dụng</button>
             </div>
         </>
     );

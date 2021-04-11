@@ -9,13 +9,13 @@ const NewItem = () => {
 
             <div className="row layout-new-item">
                  
-                <div class=" col-sm-3 col-md-3 col-lg-3 big-new-item">
+                <div className=" col-sm-3 col-md-3 col-lg-3 big-new-item">
                     
-                    <img src="./images/newItems/newItem.png" class="img-responsive" alt="Image" />
+                    <img src="./images/newItems/newItem.png" className="img-responsive" alt="Image" />
                     
                 </div>
                     
-                <div class="col-sm-6 col-md-6 col-lg-6 content-new-item">
+                <div className="col-sm-6 col-md-6 col-lg-6 content-new-item">
                     
                     <div className="row content-new-item">
                         Item story: 
@@ -26,21 +26,21 @@ const NewItem = () => {
                     </div>
                         
                     <div className="row small-new-item">
-                        <div class="col-sm-4 col-md-4 col-lg-4">
-                            <img src="./images/newItems/newItem.png" class="img-responsive" alt="Image" />
+                        <div className="col-sm-4 col-md-4 col-lg-4">
+                            <img src="./images/newItems/newItem.png" className="img-responsive" alt="Image" />
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4">
-                            <img src="./images/newItems/newItem.png" class="img-responsive" alt="Image" />
+                        <div className="col-sm-4 col-md-4 col-lg-4">
+                            <img src="./images/newItems/newItem.png" className="img-responsive" alt="Image" />
                         </div>
-                        <div class="col-sm-4 col-md-4 col-lg-4">
-                            <img src="./images/newItems/newItem.png" class="img-responsive" alt="Image" />
+                        <div className="col-sm-4 col-md-4 col-lg-4">
+                            <img src="./images/newItems/newItem.png" className="img-responsive" alt="Image" />
                         </div>    
                     </div>  
                 </div>
                     
-                <div class=" col-sm-3 col-md-3 col-lg-3 big-new-item">
+                <div className=" col-sm-3 col-md-3 col-lg-3 big-new-item">
                     
-                    <img src="./images/newItems/newItem.png" class="img-responsive" alt="Image" />
+                    <img src="./images/newItems/newItem.png" className="img-responsive" alt="Image" />
                     
                 </div>
             </div>

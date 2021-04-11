@@ -1,30 +1,31 @@
 import React from 'react';
-import {
-    Link,
-} from 'react-router-dom';
-const index = () => {
 
+const ButtonContact = () => {
     return (
         <div className = "buttons">
-            <Link herf='facebook.com'>
+            <a href='https://www.facebook.com/'>
                 <div className = 'all_buton_contact button_facebook'>   
-                    <i class="fa fa-facebook-square"></i>
+                    <i className="fa fa-facebook-square"></i>
                 </div>
-            </Link>
+            </a>
 
-            <Link to = "#">
+            <a href = "https://www.messenger.com/">
                 <div className = 'all_buton_contact button_messenger'>   
-                    <img src="./images/icon/messenger.png" class="img-responsive" alt="Image" />
+                    <img src="./images/icon/messenger.png" className="img-responsive" alt="Image" />
                 </div>
-            </Link>
+            </a>
 
-            <Link herf="twitter.com">
+            <a href="https://www.twitter.com/">
                 <div className = 'all_buton_contact button_twiter'>   
-                    <i class="fa fa-twitter" aria-hidden="true"></i>
+                    <i className="fa fa-twitter" aria-hidden="true"></i>
                 </div>
-            </Link>
+            </a>
+            <div className="button-scroll-top">
+                <i className="bi bi-chevron-double-up" />
+                UP
+            </div>
         </div>  
     );
 };
 
-export default index;
+export default ButtonContact;
