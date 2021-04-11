@@ -43,19 +43,6 @@ const ExportOrderForm = () => {
           variant="outlined"
         />
         <OrderList orders={orderlist} />
-        <button
-          type="submit"
-          style={{
-            padding: '5px',
-            margin: '10px',
-            borderRadius: '5px',
-            border: 'solid 1px black',
-            width: '100px'
-          }}
-          className="btn btn-primary"
-        >
-          Search
-        </button>
       </form>
     </div>
   );

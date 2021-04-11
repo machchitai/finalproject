@@ -7,8 +7,7 @@ import {
   Container,
   TextField,
   Typography,
-  makeStyles,
-  Link
+  makeStyles
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Page from 'src/components/Page';
@@ -59,6 +58,9 @@ const FormProductsAdd = () => {
         setTypeError('error');
         setMessageError('Add product failed!');
         setIsSubmitting(false);
+        setTimeout(() => {
+          navigate('/app/product-management', { replace: true });
+        }, 1000);
       });
   };
 
@@ -68,6 +70,10 @@ const FormProductsAdd = () => {
       ...productInfo,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleBackButton = () => {
+    navigate('/app/users', { replace: true });
   };
 
   return (
@@ -211,19 +217,17 @@ const FormProductsAdd = () => {
                     Add Product
                   </Button>
                 </Box>
-                <Link to="/app/product-management/">
-                  <Box my={2}>
-                    <Button
-                      color="secondary"
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      Cancel
-                    </Button>
-                  </Box>
-                </Link>
+                <Box my={2}>
+                  <Button
+                    onClick={handleBackButton}
+                    color="white"
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                  >
+                    Back
+                  </Button>
+                </Box>
               </form>
             )}
           </Formik>

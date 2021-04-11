@@ -122,10 +122,10 @@ router.post('/', function(req, res, next) {
                                             }
 
                                             html_string += `
-                                                <div>Bạn mua đơn hàng: <a href="http://localhost:3000/don-hang/${id_export_order}">${id_export_order}</a></div>
+                                                <div>Bạn mua đơn hàng: <a href="http://localhost:3000/orders/${id_export_order}">${id_export_order}</a></div>
                                             `
 
-                                            var maililOptions = {
+                                            var mailOptions = {
                                                 from: 'machchitai@gmail.com',
                                                 to: req.body.email,
                                                 subject: 'Cám ơn bạn đã đặt hàng tại Shop Online',
@@ -137,7 +137,7 @@ router.post('/', function(req, res, next) {
                                                 if (error) {
                                                   console.log(error);
                                                 } else {
-                                                  console.log('Eidil sent: ' + info.response);
+                                                  console.log('Email sent: ' + info.response);
                                                 }
                                             }); 
 
@@ -183,14 +183,14 @@ router.get('/:id_export_order', function(req, res, next){
     
 });
 
-router.get('/search/:order_id', function(req, res, next){
+router.get('/search/:search_array', function(req, res, next){
     pool.getConnection(function(err, connection) {
-        connection.query(`SELECT o.*
+        connection.query(`SELECT o.*, product_name, price, quantity, total
         FROM orders o
         JOIN detail_orders do
         ON o.id = do.orders_id
         WHERE id_export_order LIKE ?`,
-            ['%' + req.params.order_id + '%'],
+            ['%' + req.params.search_array + '%'],
             function(err, result, fields){
                 if(err){
                     console.log(err);

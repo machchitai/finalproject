@@ -63,18 +63,15 @@ router.put('/:id_role', function(req, res, next) {
        
         // Use the connection
         connection.query(`SELECT * FROM menu_admin`, function (error, results_menu_role, fields) {
-            if (err) throw err; // not connected!
-
-            //console.log(results_menu_role);
+            if (err) throw err; 
+            
             var update = results_menu_role.filter(menu_role => req.body.find(item_new_role => item_new_role.alias === menu_role.alias));
 
             connection.query(`DELETE FROM role_distribution_table WHERE id_roles = ?`, [req.params.id_role], function (error, result_delete, fields) {
-                if (err) throw err; // not connected!
-
+                if (err) throw err; 
                 for(let i = 0; i < update.length; i++){
                     connection.query(`INSERT INTO role_distribution_table (id_roles, id_menu_admin) VALUES(?, ?)`, [req.params.id_role, update[i].id], function(error, result_insert, fields){
-                        if (err) throw err; // not connected!
-
+                        if (err) throw err;
                         console.log(i);
                         if(i == update.length - 1){
                             
@@ -90,7 +87,6 @@ router.put('/:id_role', function(req, res, next) {
                 }
                 
             });
-            //res.json(mang_update);
         });
 
     });

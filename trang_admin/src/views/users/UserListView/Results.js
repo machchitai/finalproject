@@ -6,16 +6,17 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Card,
-  Checkbox,
   Table,
   TableBody,
   TableCell,
   TableHead,
-  TablePagination,
   TableRow,
   Button,
   Dialog,
   DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   makeStyles
 } from '@material-ui/core';
 import axios from 'axios';
@@ -31,51 +32,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Results = ({ className, users, ...rest }) => {
   const classes = useStyles();
-  const [selecteduserIds, setSelecteduserIds] = useState([]);
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [userIdCurrent, setUserIdCurrent] = useState('');
-
-  const handleSelectAll = (event) => {
-    let newSelecteduserIds;
-
-    if (event.target.checked) {
-      newSelecteduserIds = users.map((user) => user.id);
-    } else {
-      newSelecteduserIds = [];
-    }
-
-    setSelecteduserIds(newSelecteduserIds);
-  };
-
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selecteduserIds.indexOf(id);
-    let newSelecteduserIds = [];
-
-    if (selectedIndex === -1) {
-      newSelecteduserIds = newSelecteduserIds.concat(selecteduserIds, id);
-    } else if (selectedIndex === 0) {
-      newSelecteduserIds = newSelecteduserIds.concat(selecteduserIds.slice(1));
-    } else if (selectedIndex === selecteduserIds.length - 1) {
-      newSelecteduserIds = newSelecteduserIds.concat(selecteduserIds.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelecteduserIds = newSelecteduserIds.concat(
-        selecteduserIds.slice(0, selectedIndex),
-        selecteduserIds.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelecteduserIds(newSelecteduserIds);
-  };
-
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -91,7 +49,7 @@ const Results = ({ className, users, ...rest }) => {
     handleClickOpen(idUser);
   };
 
-  const handleSendRequestDeleteUser = () => {
+  const handleDeleteOneUser = () => {
     axios.delete(`http://localhost:4000/user/${userIdCurrent}`, {
       auth: {
         username: 'machchitai',
@@ -108,38 +66,26 @@ const Results = ({ className, users, ...rest }) => {
       });
   };
 
-  const handleRemoveUserSelected = () => {
-    console.log('delete user');
-    console.log(selecteduserIds);
-
-    axios.delete('http://localhost:4000/user', {
-      auth: {
-        username: 'machchitai',
-        password: '123456'
-      },
-      data: selecteduserIds
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <Card
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Button autoFocus onClick={handleRemoveUserSelected} color="secondary">
-        Delete Selected
-      </Button>
       <PerfectScrollbar>
-
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">ALERT</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              You are going to delete selected users permanently. Are you sure about this?
+            </DialogContentText>
+          </DialogContent>
           <DialogActions>
-            <Button autoFocus onClick={handleSendRequestDeleteUser} color="secondary">
+            <Button autoFocus onClick={handleDeleteOneUser} color="secondary">
               OK
             </Button>
             <Button autoFocus onClick={handleClose} color="primary">
@@ -152,17 +98,6 @@ const Results = ({ className, users, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selecteduserIds.length === users.length}
-                    color="primary"
-                    indeterminate={
-                      selecteduserIds.length > 0
-                      && selecteduserIds.length < users.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
                 <TableCell>
                   Name
                 </TableCell>
@@ -184,19 +119,8 @@ const Results = ({ className, users, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {users.slice(0, limit).map((user) => (
-                <TableRow
-                  hover
-                  key={user.id}
-                  selected={selecteduserIds.indexOf(user.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selecteduserIds.indexOf(user.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, user.id)}
-                      value="true"
-                    />
-                  </TableCell>
+              {users.map((user) => (
+                <TableRow>
                   <TableCell>
                     {user.name}
                   </TableCell>
@@ -228,15 +152,6 @@ const Results = ({ className, users, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={users.length}
-        onChangePage={handlePageChange}
-        onChangeRowsPerPage={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
     </Card>
   );
 };

@@ -8,40 +8,21 @@ import {
   CardContent,
   TextField,
   InputAdornment,
-  SvgIcon,
-  makeStyles
+  SvgIcon
 } from '@material-ui/core';
 import { Search as SearchIcon } from 'react-feather';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  importButton: {
-    marginRight: theme.spacing(1)
-  },
-  exportButton: {
-    marginRight: theme.spacing(1)
-  }
-}));
-
 const Toolbar = ({ className, ...rest }) => {
-  const classes = useStyles();
-
   return (
     <div
-      className={clsx(classes.root, className)}
+      className={clsx(className)}
       {...rest}
     >
       <Box
         display="flex"
         justifyContent="flex-end"
       >
-        <Button className={classes.importButton}>
-          Import
-        </Button>
-        <Button className={classes.exportButton}>
-          Export
-        </Button>
         <Link to="/app/users/add">
           <Button
             color="primary"

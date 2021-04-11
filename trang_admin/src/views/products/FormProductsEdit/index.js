@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Formik } from 'formik';
 import {
   Box,
@@ -68,6 +68,9 @@ const FormUserEdit = () => {
         console.log(err);
         setTypeError('error');
         setMessageError('Update failed!');
+        setTimeout(() => {
+          navigate('/app/product-management', { replace: true });
+        }, 1000);
       });
   };
 
@@ -77,6 +80,10 @@ const FormUserEdit = () => {
       ...productInfo,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleBackButton = () => {
+    navigate('/app/users', { replace: true });
   };
 
   return (
@@ -221,19 +228,17 @@ const FormUserEdit = () => {
                     Update now
                   </Button>
                 </Box>
-                <Link to="/app/product-management/">
-                  <Box my={2}>
-                    <Button
-                      color="secondary"
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      Cancel
-                    </Button>
-                  </Box>
-                </Link>
+                <Box my={2}>
+                  <Button
+                    onClick={handleBackButton}
+                    color="white"
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                  >
+                    Back
+                  </Button>
+                </Box>
               </form>
             )}
           </Formik>

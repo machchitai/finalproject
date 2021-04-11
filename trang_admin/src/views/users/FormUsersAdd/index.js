@@ -74,6 +74,10 @@ const FormUsersAdd = () => {
     setPolicy(!policy);
   };
 
+  const handleBackButton = () => {
+    navigate('/app/users', { replace: true });
+  };
+
   return (
     <Page
       className={classes.root}
@@ -82,7 +86,6 @@ const FormUsersAdd = () => {
       <Box
         display="flex"
         flexDirection="column"
-        height="100%"
         justifyContent="center"
       >
         <Container maxWidth="sm">
@@ -219,19 +222,17 @@ const FormUsersAdd = () => {
                     Sign up now
                   </Button>
                 </Box>
-                <Link to="/app/users/">
-                  <Box my={2}>
-                    <Button
-                      color="secondary"
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      Cancel
-                    </Button>
-                  </Box>
-                </Link>
+                <Box my={2}>
+                  <Button
+                    onClick={handleBackButton}
+                    color="white"
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                  >
+                    Back
+                  </Button>
+                </Box>
               </form>
             )}
           </Formik>

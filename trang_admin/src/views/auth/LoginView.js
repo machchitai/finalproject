@@ -208,7 +208,7 @@ const LoginView = ({ ...rest }) => {
                   {' '}
                   <Link
                     component={RouterLink}
-                    to="/register"
+                    to="/app/users/add"
                     variant="h6"
                   >
                     Sign up

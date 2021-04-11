@@ -34,6 +34,8 @@ app.use('/orders', ordersRouter);
 app.use('/menuadmin', menuadminRouter);
 app.use('/roledist', roledistRouter);
 
+app.disable('etag');
+
 app.use((req, res, next) => {
   //console.log(Date.now() + '-' + req.method + '-' + req.url);
   var string_log = Date.now() + '-' + req.method + '-' + req.url + '\n';

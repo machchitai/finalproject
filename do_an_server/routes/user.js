@@ -55,7 +55,7 @@ router.post('/admin-log-in', (req, res) => {
     console.log(req.body);
 
     if (!lastVisit) {
-        console.log('nothing here');
+       // console.log('');
     } else {
         console.log(lastVisit);
     }
@@ -76,7 +76,6 @@ router.post('/admin-log-in', (req, res) => {
                     if (error) throw error;
 
                     string_token = base64.encode(results[0].email + results[0].username + uuidv4());
-                    console.log(string_token);
                     created_date = (new Date().toISOString().split('.'))[0].replace(/T/, ' ');
                     expired_date = (new Date(new Date().getTime()+(30*24*60*60*1000)).toISOString().split('.'))[0].replace(/T/, ' ');
 
@@ -148,7 +147,6 @@ router.post('/admin-authorized', (req, res) => {
     
     if(authorized){
         authorized = authorized.split(' ')[1];
-        //console.log(authorized.split(' ')[1]);
 
         pool.getConnection(function(err, connection) {
             if (err) throw err;
@@ -176,52 +174,71 @@ router.post('/admin-authorized', (req, res) => {
     }
     else{
         res.json({
-            error: false,
+            error: true,
+            message:"You are not authorized!",
             permission: []
         });
     }
 });
 
 router.post('/sign-up', (req, res) => {
+    // console.log(req.body);
     pool.getConnection(function(err, connection) {
-        if (err) throw err;
-    
-    let date_ob = new Date();
-
-    // current date
-    let date = ("0" + date_ob.getDate()).slice(-2);
-
-    // current month
-    let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-    
-    // current year
-    let year = date_ob.getFullYear();
-    
-    // current hours
-    let hours = date_ob.getHours();
-    
-    // current minutes
-    let minutes = date_ob.getMinutes();
-    
-    // current seconds
-    let seconds = date_ob.getSeconds();
-    
-    created_date = (year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
-
-    connection.query(`INSERT INTO users(id_role, name, username, password, email, create_date)
-                        VALUES(?, ?, ?, ?, ?, ?)`, 
-        [req.body.id_role, req.body.name, req.body.username, md5(req.body.password), req.body.email, created_date],
-        function (error, results, fields){
+        if (err) throw err; // not connected!
+       
+        // Use the connection
+        connection.query(`SELECT * FROM users WHERE username = ? OR email = ?`, [req.body.username,req.body.email], function (error, results, fields) {
+          // Handle error after the release.
             if (error) throw error;
 
-            var response = {
-                error: false,
-                message: "create user successful"
+            if(results.length && results[0]){       
+                var error = {
+                    error: true,
+                    message: "Username already exists!"
+                }
+                res.json(error);                
             }
-            res.json(response);
 
-            connection.release();
+            else { 
+
+                let date_ob = new Date();
+                // current date
+                let date = ("0" + date_ob.getDate()).slice(-2);
+                // current month
+                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);                
+                // current year
+                let year = date_ob.getFullYear();                
+                // current hours
+                let hours = date_ob.getHours();                
+                // current minutes
+                let minutes = date_ob.getMinutes();                
+                // current seconds
+                let seconds = date_ob.getSeconds();                
+                created_date = (year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
+
+                connection.query(`INSERT INTO users(id_role, name, username, password, email, create_date)
+                                    VALUES(?, ?, ?, ?, ?, ?)`, 
+                [req.body.id_role, req.body.name, req.body.username, md5(req.body.password), req.body.email, created_date],
+                function (error, results, fields){
+                        if (error) {
+                            var error = {
+                                error: true,
+                                message: "create user failed"
+                            }
+                            res.json(error);
+                        }
+                        else {
+                            var response = {
+                                error: false,
+                                message: "create user successful"
+                            }
+                            res.json(response);
+                        }
+                        connection.release();
+                }); 
+            }
         });
+               
     });
 });
 
@@ -256,40 +273,34 @@ router.put('/:id', function(req, res, next) {
        
         // Use the connection
         connection.query(`SELECT * FROM users`, function (error, results_user, fields) {
-            if (err) throw err; // not connected!
+            if (error) throw error; // not connected!
 
-            //console.log(results_menu_role);
             var update = results_user.filter(id_user => req.body.find(item_new_user => item_new_user.id === id_user.id));
 
             connection.query(`DELETE FROM users WHERE id = ?`, [req.params.id], function (error, result_delete, fields) {
-                if (err) throw err; // not connected!
-                let date_ob = new Date();
+                if (error) throw error; 
 
+                let date_ob = new Date();
                 // current date
                 let date = ("0" + date_ob.getDate()).slice(-2);
-
                 // current month
-                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-                
+                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);                
                 // current year
-                let year = date_ob.getFullYear();
-                
+                let year = date_ob.getFullYear();                
                 // current hours
-                let hours = date_ob.getHours();
-                
+                let hours = date_ob.getHours();                
                 // current minutes
-                let minutes = date_ob.getMinutes();
-                
+                let minutes = date_ob.getMinutes();                
                 // current seconds
-                let seconds = date_ob.getSeconds();
-                
+                let seconds = date_ob.getSeconds();                
                 created_date = (year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
 
                 for(let i = 0; i < update.length; i++){
+                    
                     connection.query(`INSERT INTO users (id, id_role, name, username, password, email, create_date) VALUES(?, ?, ?, ?, ?, ?)`, 
                     [update[i].id, req.body.id_role, req.body.name, req.body.username, md5(req.body.password), req.body.email, created_date], 
                     function(error, result_insert, fields){
-                        if (err) throw err; // not connected!
+                        if (error) throw error; 
 
                         console.log(i);
                         if(i == update.length - 1){
@@ -306,11 +317,43 @@ router.put('/:id', function(req, res, next) {
                 }
                 
             });
-            //res.json(mang_update);
         });
 
     });
     
+});
+
+router.delete('/:id_user', function(req, res, next) {
+
+    pool.getConnection(function(err, connection) {
+        if (err) throw err; // not connected!
+       
+        // Use the connection
+        connection.query(`DELETE FROM users WHERE id = '${req.params.id_user}'`, function (error, results, fields) {
+          // When done with the connection, release it.
+          connection.release();
+       
+          // Handle error after the release.
+          if (error) throw error;
+       
+          res.json(results);
+        });
+    });
+    
+});
+
+router.delete('/', function(req, res, next) {
+
+    //console.log(req.body);
+    pool.getConnection(function(err, connection) {
+        if (err) throw err; // not connected!
+        
+        connection.query('DELETE FROM users WHERE (id, id) IN (?)', [selectedIds], function (error, results, fields) {
+            if (error) throw error; 
+            console.log(results)
+            res.json(results);
+        });
+    });
 });
 
 module.exports = router;

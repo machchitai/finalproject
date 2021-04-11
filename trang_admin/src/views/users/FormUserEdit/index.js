@@ -7,8 +7,7 @@ import {
   Container,
   TextField,
   Typography,
-  makeStyles,
-  Link
+  makeStyles
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import Page from 'src/components/Page';
@@ -50,6 +49,10 @@ const FormUserEdit = () => {
       });
   }, []);
 
+  const handleBackButton = () => {
+    navigate('/app/users', { replace: true });
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(userInfo);
@@ -85,7 +88,6 @@ const FormUserEdit = () => {
       <Box
         display="flex"
         flexDirection="column"
-        height="100%"
         justifyContent="center"
       >
         <Container maxWidth="sm">
@@ -107,7 +109,7 @@ const FormUserEdit = () => {
                     color="textPrimary"
                     variant="h2"
                   >
-                    Update user
+                    Edit user information
                   </Typography>
                 </Box>
                 <TextField
@@ -184,19 +186,17 @@ const FormUserEdit = () => {
                     Update now
                   </Button>
                 </Box>
-                <Link to="/app/users/">
-                  <Box my={2}>
-                    <Button
-                      color="secondary"
-                      fullWidth
-                      size="large"
-                      type="submit"
-                      variant="contained"
-                    >
-                      Cancel
-                    </Button>
-                  </Box>
-                </Link>
+                <Box my={2}>
+                  <Button
+                    onClick={handleBackButton}
+                    color="white"
+                    fullWidth
+                    size="large"
+                    variant="contained"
+                  >
+                    Back
+                  </Button>
+                </Box>
               </form>
             )}
           </Formik>
