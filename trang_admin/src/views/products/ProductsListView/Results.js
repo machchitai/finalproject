@@ -103,16 +103,19 @@ const Results = ({ className, products, ...rest }) => {
                   Name
                 </TableCell>
                 <TableCell>
-                  Description
-                </TableCell>
-                <TableCell>
                   Price
                 </TableCell>
                 <TableCell>
                   Vendor
                 </TableCell>
                 <TableCell>
+                  Description
+                </TableCell>
+                <TableCell>
                   Color
+                </TableCell>
+                <TableCell>
+                  Related Color
                 </TableCell>
                 <TableCell>
                   Size
@@ -132,9 +135,6 @@ const Results = ({ className, products, ...rest }) => {
                     {product.name}
                   </TableCell>
                   <TableCell>
-                    {product.categoryid}
-                  </TableCell>
-                  <TableCell>
                     {product.price}
                   </TableCell>
                   <TableCell>
@@ -145,6 +145,9 @@ const Results = ({ className, products, ...rest }) => {
                   </TableCell>
                   <TableCell>
                     {product.color}
+                  </TableCell>
+                  <TableCell>
+                    {product.related_color}
                   </TableCell>
                   <TableCell>
                     {product.size}

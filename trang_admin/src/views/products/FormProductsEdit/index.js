@@ -193,6 +193,18 @@ const FormUserEdit = () => {
                   variant="outlined"
                 />
                 <TextField
+                  error={Boolean(touched.related_color && errors.related_color)}
+                  fullWidth
+                  helperText={touched.related_color && errors.related_color}
+                  label="Related Color"
+                  margin="normal"
+                  name="relatedcolor"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={productInfo.related_color}
+                  variant="outlined"
+                />
+                <TextField
                   error={Boolean(touched.size && errors.size)}
                   fullWidth
                   helperText={touched.size && errors.size}

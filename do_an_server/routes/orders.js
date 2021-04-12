@@ -39,10 +39,10 @@ router.post('/', function(req, res, next) {
 
         var year = date_ob.getFullYear();
 
-        var tong_tien = 0;
+        var total = 0;
 
         req.body.detail_orders.forEach(item_cart => {
-            sum += item_cart.thanh_tien
+            sum += item_cart.price
         });
        
         // Use the connection
@@ -104,7 +104,7 @@ router.post('/', function(req, res, next) {
 
                                 if(index == req.body.detail_orders.length - 1){
 
-                                    var id_export_order = 'abcd_' + String(results.insertId).padStart(12, '0');
+                                    var id_export_order = String(results.insertId);
 
                                     connection.query('UPDATE orders SET id_export_order = ? WHERE id = ?',
                                         [
