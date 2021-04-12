@@ -72,5 +72,46 @@ router.post('/add', (req, res) => {
     });
 });
 
+router.get('/search/:search_array', function(req, res, next){
+    pool.getConnection(function(err, connection) {
+        connection.query(`SELECT *
+        FROM product
+        WHERE name LIKE ?
+        `,
+            ['%' + req.params.search_array + '%'],
+            function(err, result, fields){
+                if(err){
+                    console.log(err);
+                    throw err;
+                }
+                res.json(result);
+                connection.release();
+            }
+        )
+    });
+});
+
+router.delete('/:id_product', function(req, res, next) {
+
+    pool.getConnection(function(err, connection) {
+        if (err) throw err; // not connected!
+       
+        // Use the connection
+        connection.query(`DELETE FROM product WHERE id = '${req.params.id_product}'`, function (error, results, fields) {
+          // When done with the connection, release it.
+          connection.release();
+       
+          // Handle error after the release.
+          if (error) throw error;
+          var response = {
+                error: false,
+                message: "delete product successful"
+            }
+          res.json(response);
+        });
+    });
+    
+});
+
 
 module.exports = router;

@@ -6,7 +6,6 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import {
   Box,
   Card,
-  Checkbox,
   Table,
   TableBody,
   TableCell,
@@ -15,6 +14,9 @@ import {
   Button,
   Dialog,
   DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   makeStyles
 } from '@material-ui/core';
 import axios from 'axios';
@@ -30,57 +32,24 @@ const useStyles = makeStyles((theme) => ({
 
 const Results = ({ className, products, ...rest }) => {
   const classes = useStyles();
-  const [selectedproductIds, setSelectedproductIds] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [productIdCurrent, setproductIdCurrent] = useState('');
-
-  const handleSelectAll = (event) => {
-    let newSelectedproductIds;
-
-    if (event.target.checked) {
-      newSelectedproductIds = products.map((product) => product.id);
-    } else {
-      newSelectedproductIds = [];
-    }
-
-    setSelectedproductIds(newSelectedproductIds);
-  };
-
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedproductIds.indexOf(id);
-    let newSelectedproductIds = [];
-
-    if (selectedIndex === -1) {
-      newSelectedproductIds = newSelectedproductIds.concat(selectedproductIds, id);
-    } else if (selectedIndex === 0) {
-      newSelectedproductIds = newSelectedproductIds.concat(selectedproductIds.slice(1));
-    } else if (selectedIndex === selectedproductIds.length - 1) {
-      newSelectedproductIds = newSelectedproductIds.concat(selectedproductIds.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedproductIds = newSelectedproductIds.concat(
-        selectedproductIds.slice(0, selectedIndex),
-        selectedproductIds.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelectedproductIds(newSelectedproductIds);
-  };
+  const [open, setOpen] = React.useState(false);
+  const [productIdCurrent, setProductIdCurrent] = useState('');
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleClickOpen = (idproduct) => {
+  const handleClickOpen = (idProduct) => {
     setOpen(true);
-    setproductIdCurrent(idproduct);
+    setProductIdCurrent(idProduct);
   };
 
-  const handleDeleteproduct = (idproduct) => {
-    console.log(idproduct);
-    handleClickOpen(idproduct);
+  const handleDeleteProduct = (idProduct) => {
+    console.log(idProduct);
+    handleClickOpen(idProduct);
   };
 
-  const handleSendRequestDeleteProduct = () => {
+  const handleDeleteOneProduct = () => {
     axios.delete(`http://localhost:4000/products/${productIdCurrent}`, {
       auth: {
         username: 'machchitai',
@@ -97,38 +66,27 @@ const Results = ({ className, products, ...rest }) => {
       });
   };
 
-  const handleRemoveproductSelected = () => {
-    console.log('delete product');
-    console.log(selectedproductIds);
-
-    axios.delete('http://localhost:4000/products', {
-      auth: {
-        username: 'machchitai',
-        password: '123456'
-      },
-      data: selectedproductIds
-    })
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <Card
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Button autoFocus onClick={handleRemoveproductSelected} color="secondary">
-        Delete Selected
-      </Button>
       <PerfectScrollbar>
 
-        <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">ALERT</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              You are going to delete this product permanently. Are you sure about this?
+            </DialogContentText>
+          </DialogContent>
           <DialogActions>
-            <Button autoFocus onClick={handleSendRequestDeleteProduct} color="secondary">
+            <Button autoFocus onClick={handleDeleteOneProduct} color="secondary">
               OK
             </Button>
             <Button autoFocus onClick={handleClose} color="primary">
@@ -141,17 +99,6 @@ const Results = ({ className, products, ...rest }) => {
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox
-                    checked={selectedproductIds.length === products.length}
-                    color="primary"
-                    indeterminate={
-                      selectedproductIds.length > 0
-                      && selectedproductIds.length < products.length
-                    }
-                    onChange={handleSelectAll}
-                  />
-                </TableCell>
                 <TableCell>
                   Name
                 </TableCell>
@@ -180,29 +127,21 @@ const Results = ({ className, products, ...rest }) => {
             </TableHead>
             <TableBody>
               {products.map((product) => (
-                <TableRow
-                  hover
-                  key={product.id}
-                  selected={selectedproductIds.indexOf(product.id) !== -1}
-                >
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedproductIds.indexOf(product.id) !== -1}
-                      onChange={(event) => handleSelectOne(event, product.id)}
-                      value="true"
-                    />
-                  </TableCell>
+                <TableRow>
                   <TableCell>
                     {product.name}
                   </TableCell>
                   <TableCell>
-                    {product.description}
+                    {product.categoryid}
                   </TableCell>
                   <TableCell>
                     {product.price}
                   </TableCell>
                   <TableCell>
                     {product.vendor}
+                  </TableCell>
+                  <TableCell>
+                    {product.description}
                   </TableCell>
                   <TableCell>
                     {product.color}
@@ -219,7 +158,7 @@ const Results = ({ className, products, ...rest }) => {
                         <EditIcon />
                       </Button>
                     </Link>
-                    <Button variant="contained" color="secondary" style={{ background: '#e23f0e' }} onClick={() => { handleDeleteproduct(product.id); }}>
+                    <Button variant="contained" color="secondary" style={{ background: '#e23f0e' }} onClick={() => { handleDeleteProduct(product.id); }}>
                       <DeleteIcon />
                     </Button>
                   </TableCell>

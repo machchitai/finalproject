@@ -81,7 +81,7 @@ const Results = ({ className, users, ...rest }) => {
           <DialogTitle id="alert-dialog-title">ALERT</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              You are going to delete selected users permanently. Are you sure about this?
+              You are going to delete this user permanently. Are you sure about this?
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -99,6 +99,9 @@ const Results = ({ className, users, ...rest }) => {
             <TableHead>
               <TableRow>
                 <TableCell>
+                  RoleID
+                </TableCell>
+                <TableCell>
                   Name
                 </TableCell>
                 <TableCell>
@@ -111,9 +114,6 @@ const Results = ({ className, users, ...rest }) => {
                   Email
                 </TableCell>
                 <TableCell>
-                  RoleID
-                </TableCell>
-                <TableCell>
                   Action
                 </TableCell>
               </TableRow>
@@ -121,6 +121,9 @@ const Results = ({ className, users, ...rest }) => {
             <TableBody>
               {users.map((user) => (
                 <TableRow>
+                  <TableCell>
+                    {user.id_role}
+                  </TableCell>
                   <TableCell>
                     {user.name}
                   </TableCell>
@@ -132,9 +135,6 @@ const Results = ({ className, users, ...rest }) => {
                   </TableCell>
                   <TableCell>
                     {user.email}
-                  </TableCell>
-                  <TableCell>
-                    {user.id_role}
                   </TableCell>
                   <TableCell>
                     <Link to={`/app/users/${user.id}`}>

@@ -335,24 +335,32 @@ router.delete('/:id_user', function(req, res, next) {
        
           // Handle error after the release.
           if (error) throw error;
-       
-          res.json(results);
+          var response = {
+                error: false,
+                message: "delete user successful"
+            }
+          res.json(response);
         });
     });
     
 });
 
-router.delete('/', function(req, res, next) {
 
-    //console.log(req.body);
+router.get('/search/:id', function(req, res, next){
     pool.getConnection(function(err, connection) {
-        if (err) throw err; // not connected!
-        
-        connection.query('DELETE FROM users WHERE (id, id) IN (?)', [selectedIds], function (error, results, fields) {
-            if (error) throw error; 
-            console.log(results)
-            res.json(results);
-        });
+        connection.query(`SELECT *
+        FROM users
+        WHERE id LIKE ?`,
+            ['%' + req.params.id + '%'],
+            function(err, result, fields){
+                if(err){
+                    console.log(err);
+                    throw err;
+                }
+
+                res.json(result);
+            }
+        )
     });
 });
 

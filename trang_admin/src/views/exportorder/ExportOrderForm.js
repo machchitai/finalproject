@@ -34,7 +34,6 @@ const ExportOrderForm = () => {
       <form onSubmit={handleSubmit}>
         <TextField
           fullWidth
-          helperText="Order ID"
           label="Order ID"
           margin="normal"
           name="orderid"

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -7,12 +7,11 @@ import {
   Card,
   CardContent,
   TextField,
-  InputAdornment,
-  SvgIcon,
   makeStyles
 } from '@material-ui/core';
-import { Search as SearchIcon } from 'react-feather';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import ProductList from './Results';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -26,6 +25,28 @@ const useStyles = makeStyles((theme) => ({
 
 const Toolbar = ({ className, ...rest }) => {
   const classes = useStyles();
+  const [productname, setProductName] = useState('');
+  const [productlist, setProductList] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (productname.length) {
+      axios.get(`http://localhost:4000/products/search/${productname}`)
+        .then((response) => {
+          console.log(response);
+          setProductList(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      alert('Please insert product name!');
+    }
+  };
+
+  const handleChange = (e) => {
+    setProductName(e.target.value);
+  };
 
   return (
     <div
@@ -36,12 +57,6 @@ const Toolbar = ({ className, ...rest }) => {
         display="flex"
         justifyContent="flex-end"
       >
-        <Button className={classes.importButton}>
-          Import
-        </Button>
-        <Button className={classes.exportButton}>
-          Export
-        </Button>
         <Link to="/app/product-management/add">
           <Button
             color="primary"
@@ -54,24 +69,19 @@ const Toolbar = ({ className, ...rest }) => {
       <Box mt={3}>
         <Card>
           <CardContent>
-            <Box maxWidth={500}>
-              <TextField
-                fullWidth
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <SvgIcon
-                        fontSize="small"
-                        color="action"
-                      >
-                        <SearchIcon />
-                      </SvgIcon>
-                    </InputAdornment>
-                  )
-                }}
-                placeholder="Search product"
-                variant="outlined"
-              />
+            <Box maxWidth={1000}>
+              <form onSubmit={handleSubmit}>
+                <TextField
+                  fullWidth
+                  label="Product name"
+                  margin="normal"
+                  name="productname"
+                  onChange={handleChange}
+                  value={productname}
+                  variant="outlined"
+                />
+                <ProductList products={productlist} />
+              </form>
             </Box>
           </CardContent>
         </Card>

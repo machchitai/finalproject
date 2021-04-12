@@ -83,13 +83,13 @@ const FormUserEdit = () => {
   };
 
   const handleBackButton = () => {
-    navigate('/app/users', { replace: true });
+    navigate('/app/product-management', { replace: true });
   };
 
   return (
     <Page
       className={classes.root}
-      title="Edit User"
+      title="Edit Product"
     >
       <Box
         display="flex"

@@ -115,7 +115,7 @@ const Results = ({ className, orders, ...rest }) => {
                   <TableCell>
                     <div>
                       Name:
-                      {order.receiver_name}
+                      {order.receiver_full_name}
                     </div>
                     <div>
                       Email:
