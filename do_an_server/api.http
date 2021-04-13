@@ -159,16 +159,16 @@ POST http://localhost:4000/orders/
 Content-Type: application/json
 
 {
-    "full_name": "Hùng Nguyễn",
-    "email": "hung@gmail.com",
-    "receiver_phone": "090909090",
+    "full_name": "Tai Mach",
+    "email": "machchitai@gmail.com",
+    "receiver_phone": "123456789",
     "receiver_address": "290 Nam Ky khoi Nghia Q3, TPHCM",
     "detail_orders": [
         {
-            "orders_id": 105,
-            "product_id": 105,
-            "product_name": "Giày Addidas",
-            "quantity": 15,
+            "orders_id": 106,
+            "product_id": 106,
+            "product_name": "Giày Nike",
+            "quantity": 2,
             "price": 500,
             "total": 1000
         }
