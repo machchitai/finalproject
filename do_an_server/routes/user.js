@@ -26,9 +26,16 @@ router.get('/', function(req, res, next) {
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
 
-        
+        var query_limit = req.query.limit;
+
+        if(query_limit){
+            query_limit = ' LIMIT ' + query_limit;
+        }
+        else {
+            query_limit = ''
+        }
         // Use the connection
-        connection.query('SELECT * FROM users', function (error, results, fields) {
+        connection.query('SELECT * FROM users' + query_limit, function (error, results, fields) {
           // When done with the connection, release it.
           connection.release();
        

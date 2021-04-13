@@ -187,8 +187,8 @@ router.get('/search/:search_array', function(req, res, next){
     pool.getConnection(function(err, connection) {
         connection.query(`SELECT o.*, product_name, price, quantity, total
         FROM orders o
-        JOIN detail_orders do
-        ON o.id = do.orders_id
+        JOIN detail_orders d
+        ON o.id = d.orders_id
         WHERE id_export_order LIKE ?`,
             ['%' + req.params.search_array + '%'],
             function(err, result, fields){

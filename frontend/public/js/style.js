@@ -62,16 +62,20 @@ $(document).ready(function(){
         //console.log(pos_body);
         if(pos_body > 125){
             $(".header").css("position","fixed");
-            $('body').css('padding-top','110px');
+            /* $(".header").css("top","-130px"); */
+            $('body').css('padding-top','80px');
             /* $(".header").css("animation","move-down 1s"); */
-        } else {
+            
+            $(".header").css("animation","move-down 1s");
+            $(".header").css("animation-fill-mode","both");
+            
+        } 
+        if(pos_body < 50){
             $(".header").css("position","relative");
             $(".header").css("top","0");
             $('body').css('padding-top','0');
-        }
-        if (pos_body > 127) {
-            $(".header").css("animation","move-down 1s");
-            $(".header").css("animation-fill-mode","both");
+            $(".header").css("animation","");
+            $(".header").css("animation-fill-mode","");
         }
         if(pos_body > 200){
             $(".button-scroll-top").css("animation","move-in 0.3s");
@@ -82,12 +86,11 @@ $(document).ready(function(){
         }
     });
 
-
     function sticky_scroll() {
 
         var a = $('#infor-product').outerWidth(), // Tính độ rộng của widget cần cố định
     
-            //b = 0, // Tính độ cao của widget nằm trên
+            b = $(".alias-page").offset().top, // Tính độ cao của widget nằm trên
     
             c = a + 'px', // Đặt độ rộng bằng px của widget cần cố định
     
@@ -97,7 +100,7 @@ $(document).ready(function(){
     
             f = $(".footer").offset().top,
     
-            g = 0,
+            g = 0 + b,
     
             h = $("#infor-product").height(), // Độ cao của widget cần cố định
     
@@ -121,22 +124,6 @@ $(document).ready(function(){
     $(function() {
 
         $(window).scroll(sticky_scroll)
-
         sticky_scroll()
-
-    })
-
-    // buy now hidden
-    $('.btn-buy-now').click(function() {
-        $('.buy-now-hidden-box').css('display','block');
-        $('.box-blur').css('display','block');
-    })
-    $('.box-blur').click(function() {
-        $('.buy-now-hidden-box').css('display','none');
-        $('.box-blur').css('display','none');
-    })
-    $('.btn-close-buy-now').click(function() {
-        $('.buy-now-hidden-box').css('display','none');
-        $('.box-blur').css('display','none');
     })
 });

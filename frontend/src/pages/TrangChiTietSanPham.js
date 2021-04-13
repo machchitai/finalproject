@@ -1,4 +1,4 @@
-import React , {useEffect, useState} from 'react';
+import React , {useMemo , useState} from 'react';
 import ProductDetail from '../module/ProductDetail';
 import ListImageProduct from '../module/ListImageProduct'
 import Data from '../module/Data';
@@ -8,27 +8,19 @@ import Alias from '../module/Alias';
 const TrangChiTietSanPham = () => {
     const [DataProduct] = useState(Data);
     const location = useLocation();
-    const [product, setProduct] = useState({
-        'img':'',
-        'producer':'',
-        'name':'',
-        'gia':'',
-        'mau':'',
-        'size':'',
-        'content':'',
-        'detail':''
-    });
+    const [product, setProduct] = useState({});
     const [redirect,setRedirect] = useState(false);
     
-    useEffect(() => {
+    useMemo(() => {
         const temp = DataProduct.find(item => item.id == location.pathname.substr(1))
-        console.log(temp)
+        //console.log(temp)
         if(typeof(temp) != 'undefined' && temp != ''){
             setProduct(temp);
         } else {
             setRedirect(true);
         }
-    },[product])
+        console.log(product)
+    },[])
     return (
         <> 
             <Alias alias={[{'name':'Trang Chủ','link':'/'},{'name':'Sản Phẩm','link':'/san-pham'},{'name':product.name,'link':'/' + product.mau}]}/>
@@ -50,7 +42,8 @@ const TrangChiTietSanPham = () => {
                             name={product.name} 
                             price={product.gia}
                             color={product.mau}
-                            size={product.size} 
+                            size={product.size}
+                            stock={product.stock}
                         />
                         
                     </div>
@@ -65,13 +58,7 @@ const TrangChiTietSanPham = () => {
                             detail={DataProduct.find(item => item.id == location.pathname.substr(1)).detail}
                         /> */}
                         <ProductDetail 
-                            producer={product.producer} 
-                            name={product.name} 
-                            price={product.gia} 
-                            color={product.mau} 
-                            size={product.size}
-                            content={product.content}
-                            detail={product.detail} 
+                            product={product}
                         />
                     </div>
                 </div>

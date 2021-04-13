@@ -21,7 +21,7 @@ import {
   Lock as LockIcon,
   Settings as SettingsIcon,
   ShoppingBag as ShoppingBagIcon,
-  User as UserIcon,
+  // User as UserIcon,
   UserPlus as UserPlusIcon,
   Users as UsersIcon
 } from 'react-feather';
@@ -90,11 +90,11 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       icon: AccountBoxIcon,
       title: 'Manage Users Roles'
     },
-    {
-      href: '/app/account',
-      icon: UserIcon,
-      title: 'Edit account '
-    },
+    // {
+    //   href: '/app/account',
+    //   icon: UserIcon,
+    //   title: 'Edit account '
+    // },
     {
       href: '/app/settings',
       icon: SettingsIcon,

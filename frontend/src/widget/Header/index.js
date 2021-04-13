@@ -3,13 +3,20 @@ import {
     Link,
 } from 'react-router-dom';
 import Data from './Data';
+import Badge from '@material-ui/core/Badge';
 
 const Header = () => {
     const [getPerson,setPerson] = useState();
     const [allItem] = useState(Data);
     const [contentChild, setContentChild] = useState();
+    const [totalItemCart,setTotalItemCard] = useState(0);
 
     useEffect(() => {
+        const CartTemp = localStorage.getItem('cart');
+        if(typeof CartTemp != 'undefined' && CartTemp != null){
+            var temp = JSON.parse(CartTemp);
+            setTotalItemCard(temp.length);
+        }
         const age = localStorage.getItem('person');
         if (age == 'adults'){
             setPerson('children')
@@ -17,7 +24,7 @@ const Header = () => {
             setPerson('adults')
         }
         //console.log(allItem);
-    },[getPerson])
+    },[getPerson,totalItemCart])
 
     const showChild = (e) => {
         const temp = e.target.className;
@@ -34,6 +41,10 @@ const Header = () => {
             //console.log(contentChild)
         }
     }
+    const defaultProps = {
+        color: 'secondary',
+        children: <i className="bi bi-bag" />,
+    };
     return (
         <>  
             
@@ -56,7 +67,7 @@ const Header = () => {
                 
                     <div className="col-sm-8 list-item-menu">
                         <ul className="navbar-nav mr-auto ">
-                            <div className="col-sm-2 item-menu item-home active">
+                            <div className="col-sm-3 item-menu item-home">
                                 <li className="nav-item">
                                     <Link 
                                         className="nav-link" 
@@ -83,7 +94,7 @@ const Header = () => {
                                 
                             </div>
                             
-                            <div className="col-sm-2 item-menu item-sales">
+                            <div className="col-sm-3 item-menu item-sales">
                                 <li className="nav-item">
                                     <Link 
                                         className="nav-link" 
@@ -102,16 +113,6 @@ const Header = () => {
                                     >
                                         CONTACT US 
                                         <span className="sr-only">(current)</span>
-                                    </Link>
-                                </li>
-                            </div>
-                            <div className="col-sm-2 change-adult">
-                                <li className="nav-item upper-case">
-                                    <Link to={getPerson}
-                                        className="nav-link"
-                                        href="#"
-                                    >
-                                        {getPerson}
                                     </Link>
                                 </li>
                             </div>
@@ -145,7 +146,7 @@ const Header = () => {
                         </div>
                         <div className="action-buy">
                             <Link to="gio-hang">
-                                <i className="bi bi-bag" />
+                                <Badge badgeContent={(totalItemCart != 0)? totalItemCart : 0 } {...defaultProps} />
                             </Link>
                         </div>
                         <div className="action-acc">

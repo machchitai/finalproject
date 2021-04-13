@@ -6,7 +6,7 @@ import Data from '../module/Data';
 import Alias from '../module/Alias';
 
 const TrangSanPham = () => {
-    const [buyNowBox,setBuyNowBox] = useState(false);
+    /* const [buyNowBox,setBuyNowBox] = useState(false); */
     const [inforToBuyNow , setInforToBuyNow] = useState({
         'img':'',
         'producer':'',
@@ -21,8 +21,6 @@ const TrangSanPham = () => {
         handleChangeBuyNow();
     },[inforToBuyNow])
     const handleChangeBuyNow = (id) => {
-        setBuyNowBox(!buyNowBox);
-
         if( id != '' && typeof(id) != 'undefined') {
             const infor = DataProduct.find(item => item.id == id)
             
@@ -32,11 +30,11 @@ const TrangSanPham = () => {
                 'name':infor.name,
                 'price':infor.gia,
                 'color': infor.mau,
-                'size' : infor.size
+                'size' : infor.size,
+                'stock': infor.stock
             });
         }
-        //console.log(inforToBuyNow)
-    }
+    };
     return (
         <>
             <Alias alias={[{'name':'Trang Chủ','link':'/'},{'name':'Sản Phẩm','link':'/san-pham'}]}/>
@@ -50,7 +48,7 @@ const TrangSanPham = () => {
                     </div>
                 </div>
             </div>
-            <BuyNowHidden buyNowBox={buyNowBox} inforToBuyNow={inforToBuyNow} />
+            <BuyNowHidden inforToBuyNow={inforToBuyNow} />
         </>
     );
 };

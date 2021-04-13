@@ -33,18 +33,23 @@
 /* item product */
 .list-product{
     padding-left: 50px;
+    position: relative;
 }
 .item-product .img-product{
     overflow: hidden;
 }
-.item-product .infor-produce{
+.item-product .infor-product{
     margin-top: 15px;
 }
 .item-product .img-product img , .images-buy-now img{
     width: 340px;
     height: 450px;
     transition: 0.3s;
-    position: relative;
+
+}
+.item-product .img-product .sold-out img {
+    position: absolute;
+    top:0;
 }
 .item-product:hover img{
     transform: scale(1.2);
@@ -123,4 +128,14 @@
     position: absolute;
     top: 0;
     right: 0;
+}
+.cont-pagination{
+    display: flex;
+    justify-content: center;
+}
+#Pagination{
+    text-align: center;
+}
+#Pagination button{
+    outline: none;
 }

@@ -33,6 +33,32 @@ a:hover{
 ul {
     list-style-type: none;
 }
+.out-of-stock{
+    background-color: hsl(0, 0%, 73%);
+    border: 1px solid #5d5d5d;
+}
+.btn-buy{
+    color: white;
+    background-color: black;
+    border: #000;
+    padding: 10px;
+}
+.btn-continue{
+    color: black;
+    background-color: white;
+    border: 1px solid#000;
+    padding: 10px;
+}
+.stocking{
+    background-color: black;
+    color:white;
+    border: 1px solid black;
+}
+.btn-continue {
+    background-color: white;
+    color:black;
+    border: 1px solid black;
+}
 .btn-circle{
     border:1px solid black;
     display: inline-flex;
@@ -50,6 +76,12 @@ ul {
 }
 .border-right{
     border-right:1px solid #A9A9A9;
+}
+.width-60{
+    width:60%
+}
+.width-100{
+    width:100%
 }
 .upper-case{
     text-transform: uppercase;

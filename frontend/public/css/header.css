@@ -1,6 +1,6 @@
 /* Header */
 @keyframes move-down {
-    from {top: -150px};
+    from {top: -130px};
     to {to: 0};
 }
 .header{

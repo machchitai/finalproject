@@ -6,7 +6,7 @@ import HotProduct from '../module/HotProduct';
 import Collection from '../module/Category';
 import NewItem from '../module/NewItem';
 import GetNotification from '../module/GetNotification';
-import ButtonContact from '../module/buttonContact';
+import ButtonContact from '../module/ButtonContact';
 import $ from 'jquery';
 
 const TrangChu = () => {

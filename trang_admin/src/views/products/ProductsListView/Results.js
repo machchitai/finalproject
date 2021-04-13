@@ -11,6 +11,7 @@ import {
   TableCell,
   TableHead,
   TableRow,
+  TablePagination,
   Button,
   Dialog,
   DialogActions,
@@ -31,12 +32,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Results = ({ className, products, ...rest }) => {
+  const [limit, setLimit] = useState(10);
+  const [page, setPage] = useState(0);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [productIdCurrent, setProductIdCurrent] = useState('');
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleLimitChange = (event) => {
+    setLimit(event.target.value);
+  };
+
+  const handlePageChange = (event, newPage) => {
+    setPage(newPage);
   };
 
   const handleClickOpen = (idProduct) => {
@@ -129,7 +140,7 @@ const Results = ({ className, products, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.map((product) => (
+              {products.slice(0, limit).map((product) => (
                 <TableRow>
                   <TableCell>
                     {product.name}
@@ -171,6 +182,15 @@ const Results = ({ className, products, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
+      <TablePagination
+        component="div"
+        count={products.length}
+        onChangePage={handlePageChange}
+        onChangeRowsPerPage={handleLimitChange}
+        page={page}
+        rowsPerPage={limit}
+        rowsPerPageOptions={[5, 10, 25]}
+      />
     </Card>
   );
 };
