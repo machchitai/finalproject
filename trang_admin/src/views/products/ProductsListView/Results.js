@@ -11,7 +11,6 @@ import {
   TableCell,
   TableHead,
   TableRow,
-  TablePagination,
   Button,
   Dialog,
   DialogActions,
@@ -23,6 +22,7 @@ import {
 import axios from 'axios';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -32,8 +32,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Results = ({ className, products, ...rest }) => {
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
+  // const [limit, setLimit] = React.useState(10);
+  // const [page, setPage] = React.useState(2);
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [productIdCurrent, setProductIdCurrent] = useState('');
@@ -42,13 +42,14 @@ const Results = ({ className, products, ...rest }) => {
     setOpen(false);
   };
 
-  const handleLimitChange = (event) => {
-    setLimit(event.target.value);
-  };
+  // const handleLimitChange = (event) => {
+  //   setLimit(parseInt(event.target.value, 10));
+  //   setPage(0);
+  // };
 
-  const handlePageChange = (event, newPage) => {
-    setPage(newPage);
-  };
+  // const handlePageChange = (event, newPage) => {
+  //   setPage(newPage);
+  // };
 
   const handleClickOpen = (idProduct) => {
     setOpen(true);
@@ -140,7 +141,7 @@ const Results = ({ className, products, ...rest }) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {products.slice(0, limit).map((product) => (
+              {products.slice(0, 10).map((product) => (
                 <TableRow>
                   <TableCell>
                     {product.name}
@@ -182,15 +183,7 @@ const Results = ({ className, products, ...rest }) => {
           </Table>
         </Box>
       </PerfectScrollbar>
-      <TablePagination
-        component="div"
-        count={products.length}
-        onChangePage={handlePageChange}
-        onChangeRowsPerPage={handleLimitChange}
-        page={page}
-        rowsPerPage={limit}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
+      <Pagination count={10} variant="outlined" shape="rounded" />
     </Card>
   );
 };

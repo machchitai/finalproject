@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-
-var nodemailer = require('nodemailer');
+const  nodemailer = require('nodemailer');
 var smtpTransport = require('nodemailer-smtp-transport');
 
 var pool  = mysql.createPool({
@@ -18,8 +17,8 @@ var transporter = nodemailer.createTransport(smtpTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
     auth: {
-      user: 'machchitai@gmail.com',
-      pass: 'Machchitai17594'
+      user: 'email@gmail.com',
+      pass: '123456'
     }
 }));
 
@@ -31,29 +30,37 @@ router.post('/', function(req, res, next) {
     pool.getConnection(function(err, connection) {
         if (err) throw err; // not connected!
 
-        var date_ob = new Date();
+        let date_ob = new Date();
+        // current date
+        let date = ("0" + date_ob.getDate()).slice(-2);
+        // current month
+        let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);                
+        // current year
+        let year = date_ob.getFullYear();                
+        // current hours
+        let hours = date_ob.getHours();                
+        // current minutes
+        let minutes = date_ob.getMinutes();                
+        // current seconds
+        let seconds = date_ob.getSeconds();      
 
-        var date = ("0" + date_ob.getDate()).slice(-2);
+        let created_date = (year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds);
 
-        var month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-
-        var year = date_ob.getFullYear();
-
-        var total = 0;
+        let sum = 0;
 
         req.body.detail_orders.forEach(item_cart => {
-            sum += item_cart.price
+            sum += item_cart.price;
         });
        
         // Use the connection
-        connection.query(`INSERT INTO orders (id, full_name, email, address, phone, created_date, status, note, sum, receiver_full_name, receiver_address, receiver_phone)
-            VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
+        connection.query(`INSERT INTO orders (full_name, email, address, phone, created_date, status, note, sum, receiver_full_name, receiver_address, receiver_phone)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
             , [
                 req.body.full_name,
                 req.body.email,
                 req.body.receiver_address,
                 req.body.receiver_phone,
-                req.body.created_date = year + "-" + month + "-" + date,
+                created_date,
                 1,
                 '',
                 sum,
@@ -82,8 +89,8 @@ router.post('/', function(req, res, next) {
                         `
 
                         connection.query(
-                            `INSERT INTO detail_orders (id, orders_id, product_id, product_name, quantity, price, total) 
-                            VALUES (NULL, ?, ?, ?, ?, ?, ?);`,
+                            `INSERT INTO detail_orders (orders_id, product_id, product_name, quantity, price, total) 
+                            VALUES (?, ?, ?, ?, ?, ?);`,
                             [
                                 results.insertId,
                                 item_cart.product_id,
@@ -122,7 +129,7 @@ router.post('/', function(req, res, next) {
                                             }
 
                                             html_string += `
-                                                <div>Bạn mua đơn hàng: <a href="http://localhost:3000/orders/${id_export_order}">${id_export_order}</a></div>
+                                                <div>Bạn mua đơn hàng: ">${id_export_order}</a></div>
                                             `
 
                                             var mailOptions = {
@@ -133,7 +140,7 @@ router.post('/', function(req, res, next) {
                                                 html: html_string
                                             };
 
-                                            transporter.sendmail(mailOptions, function(error, info){
+                                            transporter.sendMail(mailOptions, function(error, info){
                                                 if (error) {
                                                   console.log(error);
                                                 } else {

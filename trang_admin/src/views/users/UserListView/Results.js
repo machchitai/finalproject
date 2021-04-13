@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Results = ({ className, users, ...rest }) => {
   const classes = useStyles();
-  const [limit, setLimit] = useState(10);
-  const [page, setPage] = useState(0);
+  const [limit, setLimit] = React.useState(10);
+  const [page, setPage] = React.useState(2);
   const [open, setOpen] = React.useState(false);
   const [userIdCurrent, setUserIdCurrent] = useState('');
 
@@ -47,7 +47,8 @@ const Results = ({ className, users, ...rest }) => {
   };
 
   const handleLimitChange = (event) => {
-    setLimit(event.target.value);
+    setLimit(parseInt(event.target.value, 10));
+    setPage(0);
   };
 
   const handleClickOpen = (idUser) => {
